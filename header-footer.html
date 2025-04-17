@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLITCH</title>
+    <link rel="stylesheet" href="header-footer.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="Media/icon2.png" alt="Logo" class="header-logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page content -->
+    <main class="cart">
+        <h2>Your Cart</h2>
+        <div class="cart-items">
+            <div class="cart-item">
+                <img src="images/shreddersrevenge.jpg" alt="Shredder's Revenge" class="item-image">
+                <div class="item-details">
+                    <h3>Shredder's Revenge</h3>
+                    <p>Price: $51.49</p>
+                    <p>Quantity: 1</p>
+                    <button class="remove-item"><i class="fas fa-trash"></i> Remove</button>
+                </div>
+            </div>
+            <div class="cart-item">
+                <img src="images/SonicAdventure2.png" alt="Sonic Adventure 2" class="item-image">
+                <div class="item-details">
+                    <h3>Sonic Adventure 2</h3>
+                    <p>Price: $39.99</p>
+                    <p>Quantity: 1</p>
+                    <button class="remove-item"><i class="fas fa-trash"></i> Remove</button>
+                </div>
+            </div>
+        </div>
+        <div class="cart-item">
+                <img src="images/undertale.jpg" alt="Undertale" class="item-image">
+                <div class="item-details">
+                    <h3>Undertale</h3>
+                    <p>Price: $33.00</p>
+                    <p>Quantity: 1</p>
+                    <button class="remove-item"><i class="fas fa-trash"></i> Remove</button>
+                </div>
+            </div>
+        <div class="cart-summary">
+            <h3>Order Summary</h3>
+            <p>Subtotal: $124.48</p>
+            <p>Tax: $18.672</p>
+            <p>Total: $143.152</p>
+            <button class="checkout-btn" onclick="window.location.href='payment.html'">Proceed to Checkout</button>
+        </div>
+    </main>
+    <footer id="contact">
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-twitch"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2025 GLITCH Game Store | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - GLITCH</title>
+    <link rel="stylesheet" href="CSS/header-footer.css">
+    <link rel="stylesheet" href="thankyou.css">
+    <style>
+    /* Thank You Page Styles */
+    .thankyou-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+        padding: 20px;
+    }
+        
+    /* Nav and Buttons Wrapper */
+    .nav-auth-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 20px; 
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .thankyou-card {
+        background-color: #2a2c4d;
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .thankyou-card i {
+        font-size: 60px;
+        color: #4CAF50;
+        margin-bottom: 20px;
+    }
+
+    .thankyou-card h2 {
+        color: #99dfec;
+        margin-bottom: 15px;
+    }
+
+    .thankyou-card p {
+        color: #ebe1de;
+        margin-bottom: 10px;
+    }
+
+    .home-btn {
+        display: inline-block;
+        background-color: #59406b;
+        color: #ebe1de;
+        padding: 12px 25px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    .home-btn:hover {
+        background-color: #4a3557;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="Media/icon2.png" alt="Logo" class="header-logo">
+        </div>
+        <div class="nav-auth-wrapper">
+        <nav>
+            <ul>
+                <li><a href="HTML%20content.html">HOME</a></li>
+                <li><a href="index.html">GAMES</a></li>
+                <li><a href="gamesowned.html">GAMES OWNED</a></li>
+                <li><a href="index.html">ABOUT US</a></li>
+                <li><a href="support.html">SUPPORT</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="thankyou-container">
+        <div class="thankyou-card">
+            <i class="fas fa-check-circle"></i>
+            <h2>Thank You for Your Purchase!</h2>
+            <p>Your order has been placed successfully.</p>
+            <p>You'll receive a confirmation email shortly.</p>
+            <a href="ho.html" class="home-btn">Return to Home</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><a href="#">Contact Us</a> | <a href="#">Support</a></p>
+    </footer>
+    
+    <!-- Redirect to home after 5 seconds -->
+    <script>
+        setTimeout(function(){
+            window.location.href = "index.html";
+        }, 5000);
+    </script>
+    <footer id="contact">
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-twitch"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2025 GLITCH Game Store | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

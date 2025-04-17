@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Methods - Glitch</title>
+    <link rel="stylesheet" href="CSS/up.css">
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="Media/icon2.png" alt="Logo" class="header-logo">
+        <span class="site-name">Glitch</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="Homepage.html">HOME</a></li>
+            <li><a href="gamestore.html">GAMES</a></li>
+            <li><a href="gamesowned.html">GAMES OWNED</a></li>
+            <li><a href="#about">ABOUT US</a></li>
+            <li><a href="support.html">SUPPORT</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main style="padding-top: 80px;">
+    <section class="profile-container">
+        <div class="profile-header">
+            <h2 class="username">Payment Methods</h2>
+            <p class="bio">Manage your cards and payment options securely</p>
+        </div>
+
+        <div class="profile-sections">
+            <div class="section-box">
+                <h3>Saved Cards</h3>
+                <ul>
+                    <li>Visa •••• 1234 - Exp: 12/26</li>
+                    <li>Mastercard •••• 9876 - Exp: 05/25</li>
+                </ul>
+            </div>
+
+            <div class="section-box">
+                <h3>Add New Card</h3>
+                <form class="edit-form" action="userprofile.html">
+                    <label>Cardholder Name</label>
+                    <input type="text" placeholder="Your Name" required>
+
+                    <label>Card Number</label>
+                    <input type="text" placeholder="1234 5678 9012 3456" required>
+
+                    <label>Expiry Date</label>
+                    <input type="text" placeholder="MM/YY" required>
+
+                    <label>CVV</label>
+                    <input type="text" placeholder="123" required>
+
+                    <button type="submit" class="settings-btn">Save Card</button>
+                    <a href="userprofile.html" class="settings-btn" style="background-color:#777;">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-social">
+        <a href="#"><i class="fab fa-discord"></i></a>
+        <a href="#"><i class="fab fa-twitch"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+    <p>&copy; 2025 GLITCH Game Store | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>
+

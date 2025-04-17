@@ -1,0 +1,352 @@
+
+/* Base Body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-image: url("../Media/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 40px;
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: 60px;
+}
+
+.logo-container {
+    position: absolute;
+    left: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    width: 60px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.header-logo:hover {
+    transform: rotate(10deg);
+}
+
+/* Nav and Buttons Wrapper */
+.nav-auth-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.SAR {
+    width: 15px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.site-name {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    padding: 6px 0;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background: #ffffff;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Profile Section */
+.profile-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #1a1a1a;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #cf4d8f;
+    margin-bottom: 15px;
+}
+
+.username {
+    font-size: 24px;
+    color: #ffffff;
+    margin: 0;
+}
+
+.bio {
+    color: #99dfeb;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.profile-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.section-box {
+    background-color: #2a2c4d;
+    padding: 20px;
+    border-radius: 16px;
+    color: #ebe1de;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.section-box:hover {
+    transform: translateY(-5px);
+}
+
+.section-box h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #99dfeb;
+    border-bottom: 1px solid #59406b;
+    padding-bottom: 8px;
+}
+
+.section-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.section-box ul li {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background-color: #1e2128;
+    border-left: 4px solid #cf4d8f;
+    border-radius: 8px;
+    text-align: left;
+}
+
+/*  SETTINGS STYLE */
+.settings-section {
+    background-color: #2a2c4d;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: #fff;
+}
+
+.settings-section h3 {
+    font-size: 20px;
+    color: #99dfeb;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #cf4d8f;
+    padding-bottom: 8px;
+}
+
+.settings-btn {
+    display: inline-block;
+    background-color: #d35193;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    margin: 10px 0;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.settings-btn:hover {
+    background-color: #b4427d;
+}
+
+
+/* Achievement Badges */
+.achievements {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.achievements li {
+    background: linear-gradient(135deg, #cf4d8f, #7b2c91);
+    padding: 10px 16px;
+    border-radius: 30px;
+    font-weight: bold;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+    font-size: 13px;
+}
+
+.achievements li:hover {
+    transform: scale(1.05);
+}
+
+/* Edit Profile Form */
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 30px;
+}
+
+.edit-form label {
+    font-weight: bold;
+    text-align: left;
+    color: #99dfeb;
+}
+
+.edit-form input,
+.edit-form textarea {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #2e2e2e;
+    color: #ffffff;
+    resize: none;
+}
+
+.edit-form input::placeholder,
+.edit-form textarea::placeholder {
+    color: #aaa;
+}
+
+/* Footer */
+footer {
+    padding: 20px;
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    margin: 10px 0 0 0;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.footer-social a {
+    color: #99dfeb;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #cf4d8f;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header {
+        padding: 10px;
+    }
+
+    .header-logo {
+        width: 50px;
+    }
+
+    nav ul {
+        gap: 10px;
+    }
+
+    nav ul li a {
+        font-size: 14px;
+    }
+
+    .profile-pic {
+        width: 90px;
+        height: 90px;
+    }
+
+    .username {
+        font-size: 20px;
+    }
+}
+

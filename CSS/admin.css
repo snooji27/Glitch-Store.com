@@ -1,0 +1,279 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: url('../Media/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #99dfec;
+  }
+  
+  
+  .main-content {
+    padding: 100px 40px 120px;
+  }
+  
+  .welcome-text {
+    font-size: 24px;
+    color: #99dfec;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  /* === HEADER === */
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 40px;
+    background-color: #1e2128;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    height: 80px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+/* === button format === */
+  .function-btn {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn {
+    background: #cf4d8f;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+  
+  .logo-container {
+    position: absolute;
+    left: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .header-logo {
+    width: 50px;
+    height: auto;
+  }
+  
+  .site-name {
+    font-size: 24px;
+    color: #99dfec;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+  }
+  
+  nav ul li {
+    position: relative;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    padding: 6px 0;
+  }
+  
+  nav ul li a:hover {
+    opacity: 0.8;
+  }
+  
+  nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background: #99dfec;
+    transition: width 0.3s ease;
+  }
+  
+  nav ul li a:hover::after {
+    width: 100%;
+  }
+  
+  /* === DASHBOARD STATS === */
+  .dashboard {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    background: #f5dce0;
+    color: #000;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+  
+  .card h3 {
+    color: #cf4d8f;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  /* === SECTION TITLES === */
+  .section-title {
+    border-bottom: 2px solid #99dfec;
+    display: inline-block;
+    padding-bottom: 5px;
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+  
+  /* === MANAGE SECTIONS === */
+  .admin-actions {
+    margin-bottom: 40px;
+    padding-left: 140px;
+  }
+  
+  /* === BUTTONS === */
+  .button-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .btn {
+    padding: 14px 28px;
+    border: none;
+    background:#cf4d8f;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 20px;
+    transition: background 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .btn:hover {
+    background: #1e2128;
+  }
+  
+  /* === FOOTER === */
+  footer {
+  width: 100%;
+  background: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: center;
+  padding: 15px;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+  
+  /* === GAME FORM PAGE === */
+  .game-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+  }
+  
+  .game-form label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #99dfec;
+  }
+  
+  .game-form input,
+  .game-form textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #ebe1de;
+    color: #ffffff;
+    resize: vertical;
+  }
+  
+  .game-form input[type="file"] {
+    background-color: transparent;
+    padding: 5px 0;
+  }
+  
+  .game-form button {
+    align-self: center;
+  }
+  
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .dashboard {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .button-group {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .btn {
+      width: 100%;
+      max-width: 200px;
+    }
+  
+    .main-content {
+      padding: 100px 20px 160px;
+    }
+  
+    .admin-actions {
+      padding-left: 30px;
+    }
+  }
+  
+  .logout-link {
+    position: fixed;
+    bottom: 30px;     /* a bit above the bottom */
+    right: 50px;      /* a bit left from the edge */
+    color: #ebe1de;
+    font-size: 17px;
+    text-decoration: none;
+    z-index: 1001;
+  }
+  
+  .logout-link:hover {
+    text-decoration: underline;
+  }
+  

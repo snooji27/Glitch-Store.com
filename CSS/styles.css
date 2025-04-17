@@ -1,0 +1,480 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* Background */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: url(../Media/background.jpg) center/cover no-repeat fixed;
+    color: #ffffff;
+    text-align: center;
+    min-height: 100vh; /*the gradient covers the whole page */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(26, 26, 26, 0.8);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: 60px;
+}
+
+/* Nav and Buttons Wrapper */
+.nav-auth-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* Logo Styling*/ 
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1001;
+}
+
+.header-logo {
+    width: 70px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.header-logo:hover {
+    transform: rotate(10deg);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    
+}
+
+nav ul li {
+    display: inline;
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    padding: 6px 0;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background: #ffffff;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Header Buttons Container */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Header Login/Signup Buttons */
+.login-btn {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.signup-btn {
+    background: #cf4d8f;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    background: #b83d7a;
+    text-decoration: underline;
+}
+
+.signup-btn:hover {
+    background: #b83d7a;
+    text-decoration: underline;
+}
+
+
+/* Main Styles */
+main {
+    max-width: 1200px;
+    margin: 80px auto 20px;
+    padding: 0 20px;
+    flex: 1;
+}
+
+/* Games Owned Page Heading */
+main h2 {
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/*Search Bar Styles*/ 
+.search {
+    --padding: 8px;
+        width: max-content; 
+        display: flex;
+        align-items: center;
+        padding: var(--padding);  
+        border-radius: 28px; 
+        background: rgba(30, 30, 47, 0.8);
+        transition: box-shadow 0.25s;
+        margin: 10px auto;
+        
+    }
+    
+    .search focus-within{
+        box-shadow: 0 0 2px rgba(255, 255, 255, 0.3) ;
+    } 
+    .search-icon {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: var(--padding);
+}
+
+    .search-input { 
+        font-size: 14px; 
+        font-family: 'Inter', sans-serif;
+        margin-left: var(--padding);
+        outline: none;
+        border: none;
+        background: transparent;
+        width: 300px;  
+    }
+     .search-input placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* FAQ Section (Support Page) */
+.faq {
+    margin-bottom: 40px;
+}
+
+.faq h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.faq-item {
+    background: rgba(30, 30, 47, 0.5); 
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Contact Form (Support Page) */
+.contact-form h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.contact-form form {
+    background: rgba(30, 30, 47, 0.5); 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    background: rgba(30, 30, 47, 0.8); 
+    color: #ffffff;
+    text-align: center;
+}
+
+.contact-form button {
+    background-color: #1e2128;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.contact-form button:hover {
+   background: #cf4d8f;
+    transform: scale(1.03);
+}
+
+/* Games List (Games Owned Page) */
+.games-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.game-card {
+    background: rgba(30, 30, 47, 0.5); 
+    width: 200px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+}
+
+.game-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.game-card h3 {
+    margin: 10px 0;
+    color: #ffffff;
+}
+
+.game-card p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.game-card button {
+    background-color: #1e2128;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.game-card button:hover {
+    background: #cf4d8f;
+    transform: scale(1.05);
+}
+
+/* Footer Styles */
+footer {
+    padding: 20px;
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    margin: 10px 0;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+footer a:hover {
+    opacity: 0.8;
+}
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 10px 0;
+}
+
+.footer-social a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-social a:hover {
+    color: #cf4d8f;
+    transform: translateY(-2px);
+}
+
+.footer-social .fa-discord:hover {
+    color: #7289da;
+}
+
+.footer-social .fa-twitch:hover {
+    color: #9146ff;
+}
+
+.footer-social .fa-youtube:hover {
+    color: #ff0000;
+}
+.footer-social .fa-twitter:hover {
+    color: #1da1f2;
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding: 15px;
+    }
+    
+    .footer-social {
+        gap: 20px;
+    }
+    
+    .footer-social a {
+        font-size: 14px;
+    }
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: #cf4d8f;
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(207, 77, 143, 0.3);
+    z-index: 1000;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-2px);
+    background: #b83d7a;
+    opacity: 0.9;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    header {
+        flex-direction: row;
+        padding: 10px 20px;
+        height: 60px;
+    }
+
+     .logo-container {
+        margin: 0;
+    }
+    
+    nav {
+        justify-content: flex-end; 
+    }
+    
+    nav ul {
+        gap: 10px;
+    }
+
+    .header-logo {
+        width: 50px;
+    }
+
+    
+    nav ul li a {
+        font-size: 14px;
+    }
+    
+    .email-link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.email-link:hover {
+    color: #cf4d8f; 
+    text-decoration: underline;
+}
+    .contact-link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+    color: #cf4d8f; 
+    text-decoration: underline;
+}
+}

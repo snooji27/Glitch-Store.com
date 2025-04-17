@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Login</title>
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Poppins", sans-serif;
+                text-decoration: none;
+                list-style: none;
+            }
+
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background-image: url('Media/background.jpg');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+                background-repeat: no-repeat;
+            }
+
+            .container {
+                width: 400px;
+                background: #2a2c4d;
+                padding: 40px;
+                border-radius: 20px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+                color: #ebe1de;
+                text-align: center;
+            }
+
+            .logo-header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+            .logo-header img {
+                margin-right: 15px;
+            }
+
+            .container h1 {
+                font-size: 32px;
+            }
+
+            .input-box {
+                position: relative;
+                margin: 20px 0;
+            }
+
+            .input-box input {
+                width: 100%;
+                padding: 13px 50px 13px 20px;
+                background: #2a2c4d;
+                border-radius: 8px;
+                border: 1px solid #ebe1de;
+                outline: none;
+                font-size: 16px;
+                color: #ebe1de;
+                font-weight: 500;
+            }
+
+            .input-box input::placeholder {
+                color: #ccc;
+            }
+
+            .input-box i {
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 20px;
+                color: #ebe1de;
+            }
+
+            .forgot-link {
+                text-align: right;
+                margin-bottom: 20px;
+            }
+
+            .forgot-link a {
+                font-size: 14px;
+                color: #ebe1de;
+                transition: 0.3s;
+            }
+
+            .forgot-link a:hover {
+                color: #b2e2eb;
+                text-decoration: underline;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 13px;
+                background: #99dfec;
+                border: none;
+                border-radius: 8px;
+                color: #2a2c4d;
+                font-weight: 600;
+                font-size: 16px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            .btn:hover {
+                background: #b2e2eb;
+                color: white;
+            }
+
+            .support-link {
+                margin-top: 15px;
+            }
+
+            .support-link a {
+                font-size: 14px;
+                color: #ebe1de;
+                transition: 0.3s;
+            }
+
+            .support-link a:hover {
+                color: #b2e2eb;
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="logo-header">
+                <img src="Media/icon2.png" alt="Admin Logo" width="50" />
+                <h1>Admin Login</h1>
+            </div>
+            <div class="input-box">
+                <input type="text" name="username" placeholder="Username" required />
+                <i class="bx bxs-user"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" placeholder="Password" required />
+                <i class="bx bxs-lock-alt"></i>
+            </div>
+            <div class="forgot-link">
+                <a href="ForgotAdmin.html">Forgot Password?</a>
+            </div>
+            <button class="btn" onclick="login()">Log in</button>
+            <div class="support-link">
+                <a href="support.html">Need help?</a>
+            </div>
+        </div>
+
+        <script>
+            function login() {
+                const username = document.querySelector('input[name="username"]').value;
+                const password = document.querySelector('input[name="password"]').value;
+
+                if (username === "admin" && password === "admin123") {
+                    window.location.href = "admin.html";
+                } else {
+                    alert("Invalid username or password.");
+                }
+            }
+        </script>
+    </body>
+</html>

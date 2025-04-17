@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - Glitch</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+        text-decoration: none;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-image: url('Media/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+    }
+
+    .dob-container {
+        height: 550px;
+        width: 400px;
+        padding: 40px;
+        background-color: #2a2c4d;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+        text-align: center;
+        color: #ebe1de;
+    }
+
+    .logo-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-header img {
+      margin-right: 10px;
+    }
+
+    h1 {
+        font-size: 50px;
+        margin-bottom: 0px;
+    }
+
+    h2 {
+        font-size: 25px;
+        margin-bottom: 20px;
+    }
+    
+    p {
+        font-size: 12px;
+        margin-bottom: 30px;
+        color: #ebe1de;
+    }
+    
+    .divider {
+      width: 100%;
+      height: 1px;
+      background-color: #cf4d8f;
+      margin: 30px 0 40px;
+    }
+
+    .dob-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    select {
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #cf4d8f;
+      background-color: #2a2c4d;
+      color: #ebe1de;
+      font-size: 14px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .dob-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background-color: #cf4d8f;
+      color: #2a2c4d;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .dob-btn:hover {
+      background-color: #ff77b0;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dob-container">
+    <div class="logo-header">
+      <img src="Media/icon2.png" alt="Glitch Logo" width="80" />
+      <h1>Glitch</h1>
+    </div>
+    <div class="divider"></div>
+    <h2>Enter Your Date of Birth</h2>
+      <p>Please enter your date of birth. This is to help you have a safe and fun experience whatever your age.</p>
+      <!--using get here instead of post just to load the page, live hosting doesnt support post-->
+      <form id="dobForm" action="gamestore.html" method="get"> 
+        <div class="dob-row">
+          <select name="day" id="daySelect" required>
+            <option value="" disabled selected>Day</option>
+          </select>
+      
+          <select name="month" id="monthSelect" required>
+            <option value="" disabled selected>Month</option>
+          </select>
+      
+          <select name="year" id="yearSelect" required>
+            <option value="" disabled selected>Year</option>
+          </select>
+        </div>
+      
+        <div style="text-align: left; margin-bottom: 10px;">
+          <label>
+            <input type="checkbox" id="termsCheckbox" required />
+            I agree to the <a href="T&C.html" style="color: #ff77b0;">terms and conditions</a>
+          </label><br>
+          <label>
+            <input type="checkbox" id="promoCheckbox" name="promo" />
+            I want to receive promotions on my email
+          </label>
+        </div>
+      
+        <button type="submit" class="dob-btn" style="margin-bottom: 20px;">Continue</button>
+      </form>
+  </div>
+
+  <script>
+    const daySelect = document.getElementById("daySelect");
+    const monthSelect = document.getElementById("monthSelect");
+    const yearSelect = document.getElementById("yearSelect");
+  
+    function fillDays() {
+      for (let day = 1; day <= 31; day++) {
+        const option = document.createElement("option");
+        option.value = day;
+        option.text = day;
+        daySelect.appendChild(option);
+      }
+    }
+  
+    function fillMonths() {
+      const monthNames = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      ];
+      monthNames.forEach((month, index) => {
+        const option = document.createElement("option");
+        option.value = index + 1;
+        option.text = month;
+        monthSelect.appendChild(option);
+      });
+    }
+  
+    function fillYears() {
+      for (let year = 2025; year >= 1960; year--) {
+        const option = document.createElement("option");
+        option.value = year;
+        option.text = year;
+        yearSelect.appendChild(option);
+      }
+    }
+  
+    fillDays();
+    fillMonths();
+    fillYears();
+  
+    // Form validation
+    const form = document.getElementById("dobForm");
+  
+    form.addEventListener("submit", function (event) {
+      const day = daySelect.value;
+      const month = monthSelect.value;
+      const year = yearSelect.value;
+      const terms = document.getElementById("termsCheckbox").checked;
+  
+      if (!day || !month || !year) {
+        alert("Please fill out all the fields for your date of birth.");
+        event.preventDefault();
+        return;
+      }
+  
+      if (!terms) {
+        alert("You must agree to the terms and conditions to continue.");
+        event.preventDefault();
+      }
+    });
+  </script>
+</body>
+
+</html>

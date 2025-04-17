@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add New Game</title>
+  <link rel="stylesheet" href="CSS/admin.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-container">
+      <img src="Media/icon2.png" alt="Logo" class="header-logo" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="admin.html" class="function-btn">Admin Dashboard</a></li>
+        <li><a href="add-game.html" class="function-btn">Add Game</a></li>
+        <li><a href="view-games.html" class="function-btn">View Games</a></li>
+        <li><a href="Selection.html" class="logout-btn">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <h1 class="welcome-text">Add New Game</h1>
+
+    <form class="game-form">
+      <label for="game-name">Game Name</label>
+      <input type="text" id="game-name" name="game-name" required>
+
+      <label for="game-desc">Game Description</label>
+      <textarea id="game-desc" name="game-desc" rows="4" required></textarea>
+
+      <label for="price">Price ( $)</label>
+      <input type="number" id="price" name="price" required>
+
+      <label for="image">Game Cover Image</label>
+      <input type="file" id="image" name="image" accept="image/*" required>
+
+      <label for="upload">Upload Game File</label>
+      <input type="file" id="upload" name="upload" accept=".zip,.rar,.exe" required>
+
+      <button type="submit" class="btn">Submit Game</button>
+    </form>
+  </main>
+</body>
+<!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2025 GLITCH Game Store | All Rights Reserved</p>
+</footer>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="../CSS/gamestyle.css"/>
+  <title>Hades</title>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+        <img src="../Media/icon2.png" alt="Logo" class="header-logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../Homepage.html">Home</a></li>
+        <li><a href="../gamestore.html">Games</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="../Support.html">Contact</a></li>
+        <li><a href="../Selection.html" class="login-btn">Login</a></li>
+        <li><a href="../User_Login_Signup.html" class="signup-btn">Sign Up</a></li>
+      </ul>
+  </nav>
+</header>
+
+<main class="game-page-wrapper">
+  <section class="game-detail-container">
+
+    <!-- Media carousel -->
+    <div class="media-carousel">
+      <div class="media-display">
+        <div class="media" id="media1">
+          <iframe src="https://www.youtube.com/embed/91t0ha9x0AE?si=iwIkHCj2NNbNX_mU" title="Game Trailer" allowfullscreen></iframe>
+        </div>
+        <div class="media" id="media2">
+          <img src="../Screenshots/Hades_SS.jpg" alt="Game Screenshot 1" />
+        </div>
+        <div class="media" id="media3">
+          <img src="../Screenshots/Hades_SS2.jpg" alt="Game Screenshot 2" />
+        </div>
+        <div class="media" id="media4">
+          <img src="../Screenshots/Hades_SS3.jpg" alt="Game Screenshot 3" />
+        </div>
+        <div class="media" id="media5">
+          <img src="../Screenshots/Hades_SS4.jpg" alt="Game Screenshot 4" />
+        </div>
+      </div>
+      <div class="thumbnails">
+        <a href="#media1"><img src="https://img.youtube.com/vi/91t0ha9x0AE/hqdefault.jpg" alt="YouTube Trailer"></a>
+        <a href="#media2"><img src="../Screenshots/thumbnails/Hades_SS_Thumb.jpg" alt="Thumb 1"></a>
+        <a href="#media3"><img src="../Screenshots/thumbnails/Hades_SS_Thumb2.jpg" alt="Thumb 2"></a>
+        <a href="#media4"><img src="../Screenshots/thumbnails/Hades_SS_Thumb3.jpg" alt="Thumb 3"></a>
+        <a href="#media5"><img src="../Screenshots/thumbnails/Hades_SS_Thumb4.jpg" alt="Thumb 4"></a>
+      </div>
+    </div>
+
+    <!-- Game info -->
+    <div class="game-info">
+      <h1 class="game-title">Hades</h1>
+      <p class="game-price"> <img src="../Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR">19.99</p>
+      <p class="game-description">
+        <strong>Genre:</strong> Rogue-like, Action RPG<br>
+        <strong>Platforms:</strong> PC, PlayStation, Xbox<br>
+        <strong>Release Date:</strong> 2020
+        <br>
+        Defy the god of the dead as you hack and slash out of the Underworld in this rogue-like dungeon crawler 
+        from the creators of Bastion, Transistor, and Pyre.
+      </p>
+      <form action="#" method="POST" class="cart-form">
+        <input type="hidden" name="game_id" value="hades" />
+        <label for="quantity">Qty:</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1" class="quantity-input" />
+        <button type="submit" class="btn add-cart">Add to Cart</button>
+      </form>
+    </div>      
+  </section>
+</main>
+</body>
+
+</html>

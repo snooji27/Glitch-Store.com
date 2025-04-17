@@ -1,0 +1,455 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#2a2c4d, #1e2128);
+    color: white;
+    text-align: center;
+    overflow: auto; 
+    user-select: none; 
+    background-image: url('../Media/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+html{
+scroll-behavior: smooth;
+}
+
+
+/* Header Login/Signup Buttons */
+.login-btn {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.signup-btn {
+    background: #cf4d8f;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    color: #cf4d8f;
+}
+
+.signup-btn:hover {
+    background: #b83d7a;
+}
+
+/* Background Video Container */
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 90vh; 
+    overflow: hidden;
+    margin-bottom: 100px;
+}
+
+/* Video as Background */
+video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; 
+    user-select: none; 
+
+}
+
+/*-----------------Header style-------------------- */
+
+/* Header */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 40px;
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: 60px;
+}
+
+/* Logo Styling */
+.logo-container {
+    position: absolute;
+    left: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    width: 60px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.header-logo:hover {
+    transform: rotate(10deg);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+nav ul li {
+    display: inline;
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    padding: 6px 0;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background: #ffffff;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header {
+        padding: 10px;
+    }
+
+    .header-logo {
+        width: 50px;
+    }
+
+    nav ul {
+        gap: 10px;
+    }
+
+    nav ul li a {
+        font-size: 14px;
+    }
+}
+/*--------------------Header ends--------------------*/
+/* Add this to override any conflicting styles */
+.game-info p img.SAR {
+  content: url('../Media/SAR_Symbol-white.png') !important;
+  width: 15px !important;
+  height: 15px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  object-fit: contain !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin-right: 3px !important;
+}
+
+/* Protect against .game-card img rules */
+.game-info p img {
+  max-width: none !important;
+  height: auto !important;
+  background: transparent !important;
+}
+/* Footer */
+footer {
+    padding: 20px;
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    margin: 10px 0 0 0;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 10px;
+}
+
+.footer-social a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-social a:hover {
+    color: #cf4d8f;
+    transform: translateY(-2px);
+}
+
+.footer-social .fa-discord:hover {
+    color: #7289da;
+}
+
+.footer-social .fa-twitch:hover {
+    color: #9146ff;
+}
+
+.footer-social .fa-youtube:hover {
+    color: #ff0000;
+}
+
+.footer-social .fa-twitter:hover {
+    color: #1da1f2;
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding: 15px;
+    }
+    
+    .footer-social {
+        gap: 20px;
+    }
+    
+    .footer-social a {
+        font-size: 14px;
+    }
+}
+
+
+
+/* footer end*/
+
+/* Overlay Content */
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
+}
+
+.overlay h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+.overlay p {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background: #59406b;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+video::-webkit-media-controls {
+    display: none !important;
+}
+
+/*Responsive */
+@media (max-width: 768px) {
+    .overlay h1 {
+        font-size: 2rem;
+    }
+    .overlay p {
+        font-size: 1.2rem;
+    }
+    .btn {
+        padding: 12px 25px;
+        font-size: 16px;
+    }
+}
+
+
+/*pic of games*/
+  /* MAIN GAME SECTION */
+  .games-section {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(200px, 1fr));
+    gap: 30px; 
+    padding: 20px;
+    width: 100%;
+    max-width: 1400px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+  .game-card {
+    background-color: #59406b;
+    border-radius: 12px;
+    padding: 12px;
+    width: 230px;
+    height: 230px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    position: relative;
+    display: inline-block;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .game-card:hover {
+    transform: scale(1.05);
+    z-index: 2;
+  }
+  
+  .game-card img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .game-info {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .game-info h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .game-info p {
+    font-size: 14px;
+    color: #aaa;
+  }
+  
+  .game-card:hover .add-to-cart {
+    display: block;
+  }
+  
+  a.game-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* RESPONSIVE TWEAKS */
+  @media (max-width: 768px) {
+    nav ul {
+      gap: 20px;
+    }
+  
+    .games-section {
+      grid-template-columns: repeat(5, 1fr));
+      padding: 20px;
+    }
+  
+    .game-card img {
+      height: 200px;
+    }
+  }
+
+  .item-details h3 {
+    margin: 0 0 10px 0;
+    color: #99dfec;
+}
+
+.item-details p {
+    margin: 5px 0;
+}
+
+  .search-container {
+    display: flex;
+    flex-grow: 1;
+    max-width: 500px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+}
+
+.search-bar {
+    padding: 10px 15px;
+    border-radius: 5px 0 0 5px;
+    border: none;
+    width: 100%;
+    background-color: #1e1f3a;
+    color: #ebe1de;
+}
+
+.search-btn {
+    background-color: #59406b;
+    color: #ebe1de;
+    border: none;
+    padding: 0 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.game-card h3 {
+    margin: 0 0 10px 0;
+    color: #99dfec;
+}
+
+@media (max-width: 768px) {
+    .search-container {
+        max-width: 100%;
+    }
+    @media (max-width: 1200px) {
+    .games-section {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+}

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - GLITCH</title>
+    <link rel="stylesheet" href="CSS/header-footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #0a0a0a;
+        color: #ebe1de;
+        line-height: 1.6;
+        padding-bottom: 100px;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;
+        background: rgba(26, 26, 26, 0.9);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo-container img {
+        height: 40px;
+        transition: transform 0.3s ease;
+    }
+
+    .logo-container img:hover {
+        transform: scale(1.05);
+    }
+
+    .SAR {
+        width: 15px;
+        height: auto;
+        transition: transform 0.3s ease;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+    }
+
+    nav a {
+        color: #ebe1de;
+        font-weight: 500;
+        position: relative;
+        padding: 5px 0;
+        text-decoration: none;
+    }
+
+    nav a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #99dfec;
+        transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+        width: 100%;
+    }
+
+    .wishlist-tools {
+        background-color: #2a2c4d;
+        padding: 15px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 70px;
+    }
+
+    .nav-auth-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .search-container {
+        display: flex;
+        flex-grow: 1;
+        max-width: 500px;
+    }
+
+    .search-bar {
+        padding: 10px 15px;
+        border-radius: 5px 0 0 5px;
+        border: none;
+        width: 100%;
+        background-color: #1e1f3a;
+        color: #ebe1de;
+    }
+
+    .search-btn {
+        background-color: #59406b;
+        color: #ebe1de;
+        border: none;
+        padding: 0 15px;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+    }
+
+    .sort-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .sort-select {
+        padding: 8px 12px;
+        border-radius: 5px;
+        background-color: #1e1f3a;
+        color: #ebe1de;
+        border: 1px solid #59406b;
+    }
+
+    .wishlist {
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        color: #ebe1de;
+        padding-bottom: 100px;
+    }
+
+    .wishlist h2 {
+        text-align: left;
+        margin-bottom: 20px;
+        color: #99dfec;
+    }
+
+    .wishlist-item {
+        display: flex;
+        align-items: center;
+        background-color: #2a2c4d;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .item-image {
+        width: 100px;
+        height: 100px;
+        margin-right: 20px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+
+    .item-details {
+        flex-grow: 1;
+        text-align: left;
+    }
+
+    .item-details h3 {
+        margin: 0 0 10px 0;
+        color: #99dfec;
+    }
+
+    .item-details p {
+        margin: 5px 0;
+    }
+
+    .item-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .move-to-cart, .remove-item {
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.3s;
+    }
+
+    .move-to-cart {
+        background-color: #59406b;
+        color: #ebe1de;
+        border: none;
+    }
+
+    .remove-item {
+        background-color: #cf4d8f;
+        color: #ebe1de;
+        border: none;
+    }
+
+    .move-to-cart:hover {
+        background-color: #4a3557;
+    }
+
+    .remove-item:hover {
+        background-color: #b43d7d;
+    }
+
+    footer {
+        background: rgba(26, 26, 26, 0.9);
+        padding: 30px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .footer-social {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .footer-social a {
+        color: #ebe1de;
+        font-size: 24px;
+        transition: color 0.3s;
+    }
+
+    .footer-social a:hover {
+        color: #99dfec;
+    }
+
+    footer p {
+        color: #ebe1de;
+        font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+        header {
+            padding: 15px 20px;
+        }
+
+        nav ul {
+            gap: 15px;
+        }
+
+        .wishlist-tools {
+            flex-direction: column;
+            align-items: stretch;
+            margin-top: 60px;
+        }
+
+        .search-container {
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .wishlist-item {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .item-image {
+            margin-right: 0;
+            margin-bottom: 15px;
+        }
+
+        .item-actions {
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        nav ul {
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .item-actions {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .move-to-cart, .remove-item {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../Media/icon2.png" alt="Logo" class="header-logo">
+        </div>
+        <div class="nav-auth-wrapper">
+            <nav>
+                <ul>
+                    <li><a href="Homepage.html">HOME</a></li>
+                    <li><a href="gamestore.html">GAMES</a></li>
+                    <li><a href="gamesowned.html">GAMES OWNED</a></li>
+                    <li><a href="#about">ABOUT US</a></li>
+                    <li><a href="support.html">SUPPORT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="wishlist-tools">
+        <div class="search-container">
+            <input type="text" placeholder="Search your wishlist..." class="search-bar">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="sort-container">
+            <label for="sort-options">Sort by:</label>
+            <select id="sort-options" class="sort-select">
+                <option value="date-added">Date Added</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="name">Name (A-Z)</option>
+            </select>
+        </div>
+    </div>
+
+    <main class="wishlist">
+        <h2>Your Wishlist</h2>
+        <div class="wishlist-items">
+            <div class="wishlist-item">
+                <img src="Media/Minecraft_poster.jpeg" alt="Minecraft" class="item-image">
+                <div class="item-details">
+                    <h3>Minecraft</h3>
+                    <p>Price: <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> 109.00</p>
+                    <div class="item-actions">
+                        <button class="move-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button class="remove-item"><i class="fas fa-trash"></i> Remove</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wishlist-item">
+                <img src="Media/ow2_poster.jpeg" alt="Overwatch 2" class="item-image">
+                <div class="item-details">
+                    <h3>Overwatch 2</h3>
+                    <p>Price: <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> 39.99</p>
+                    <div class="item-actions">
+                        <button class="move-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button class="remove-item"><i class="fas fa-trash"></i> Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="contact">
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-twitch"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2025 GLITCH Game Store | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.remove-item').forEach(button => {
+            button.addEventListener('click', function() {
+                const wishlistItem = this.closest('.wishlist-item');
+                wishlistItem.style.transform = 'translateX(-100%)';
+                wishlistItem.style.opacity = '0';
+                setTimeout(() => {
+                    wishlistItem.remove();
+                }, 300);
+            });
+        });
+
+        document.querySelectorAll('.move-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const gameTitle = this.closest('.wishlist-item').querySelector('h3').textContent;
+                alert(`${gameTitle} has been added to your cart!`);
+            });
+        });
+
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-bar').value.toLowerCase();
+            const items = document.querySelectorAll('.wishlist-item');
+            
+            items.forEach(item => {
+                const title = item.querySelector('h3').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        document.querySelector('.sort-select').addEventListener('change', function() {
+            const sortValue = this.value;
+            const container = document.querySelector('.wishlist-items');
+            const items = Array.from(document.querySelectorAll('.wishlist-item'));
+            
+            items.sort((a, b) => {
+                if (sortValue === 'date-added') {
+                    return 0;
+                } else if (sortValue === 'price-low') {
+                    const priceA = parseFloat(a.querySelector('p').textContent.match(/\d+\.\d+/)[0]);
+                    const priceB = parseFloat(b.querySelector('p').textContent.match(/\d+\.\d+/)[0]);
+                    return priceA - priceB;
+                } else if (sortValue === 'price-high') {
+                    const priceA = parseFloat(a.querySelector('p').textContent.match(/\d+\.\d+/)[0]);
+                    const priceB = parseFloat(b.querySelector('p').textContent.match(/\d+\.\d+/)[0]);
+                    return priceB - priceA;
+                } else if (sortValue === 'name') {
+                    const nameA = a.querySelector('h3').textContent.toLowerCase();
+                    const nameB = b.querySelector('h3').textContent.toLowerCase();
+                    return nameA.localeCompare(nameB);
+                }
+                return 0;
+            });
+
+            items.forEach(item => container.appendChild(item));
+        });
+    </script>
+</body>
+</html>
