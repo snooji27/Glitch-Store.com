@@ -160,7 +160,36 @@ main h2 {
      .search-input: placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
+/* Sort Dropdown Styles */
+.sort {
+    margin-top: 10px;
+    display: inline-block;
+    text-align: left;
+}
 
+.sort label {
+    color: #ffffff;
+    margin-right: 5px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+}
+
+.sort select {
+    padding: 5px;
+    background: rgba(30, 30, 47, 0.8);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sort select:hover {
+    background: rgba(30, 30, 47, 1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
 /* FAQ Section (Support Page) */
 .faq {
     margin-bottom: 40px;
