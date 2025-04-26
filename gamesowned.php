@@ -11,7 +11,7 @@
 <body>
     <?php include 'db_connect.php'; ?>
 
-// to check if the user is looged in //
+<!-- to check if the user is looged in -->
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
@@ -21,7 +21,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 $user_id = $_SESSION['user_id'];
 $search_term = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'title_asc';
 ?>
+
 
     <header>
         <div class="logo-container">
@@ -54,11 +56,18 @@ $search_term = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['
         <form action="gamesowned.php" method="GET">
     <div class="search">
         <span class="search-icon material-symbols-outlined">search</span>
-        <input class="search-input" type="search" name="search" placeholder="Search Your Games" style="color: #ffffff;">
+        <input class="search-input" type="search" name="search" placeholder="Search Your Games" style="color: #ffffff;" value="<?php echo htmlspecialchars($search_term); ?>">
+    </div>
+    <div class="sort">
+        <label for="sort">Sort by: </label>
+        <select name="sort" id="sort" onchange="this.form.submit()">
+            <option value="title_asc" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'title_asc') ? 'selected' : ''; ?>>Title (A-Z)</option>
+            <option value="title_desc" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'title_desc') ? 'selected' : ''; ?>>Title (Z-A)</option>
+        </select>
     </div>
 </form>
         
-        <section class="games-list">
+<section class="games-list">
 <?php
 $query = "SELECT g.game_id, g.title, g.image_url, g.download_url, go.purchase_date
           FROM GameOwnership go
@@ -66,6 +75,11 @@ $query = "SELECT g.game_id, g.title, g.image_url, g.download_url, go.purchase_da
           WHERE go.user_id = $user_id";
 if ($search_term) {
     $query .= " AND g.title LIKE '%$search_term%'";
+}
+if ($sort == 'title_asc') {
+    $query .= " ORDER BY g.title ASC";
+} elseif ($sort == 'title_desc') {
+    $query .= " ORDER BY g.title DESC";
 }
 $result = mysqli_query($conn, $query);
 
