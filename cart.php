@@ -1,3 +1,36 @@
+<?php 
+session_start();
+require_once ('db_connect.php');
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php?redirect=cart.php');
+    exit;
+}
+
+$database = new $Database();
+$database->connect();
+
+if (isset($_POST['remove_all'])) {
+    $_SESSION['cart'] = [];
+    header('Location: cart.html');
+    exit;
+}
+
+//if (isset($_POST['remove_games'])){
+//    $game_id = $_POST['remove_games'];
+//    $_SESSION['cart'] = array_filter($_SESSION['cart'], function($games) use($game_id) {return $games('id') != $game_id};
+//});
+//header('Location: cart.html');
+//exit;
+//}
+
+//$subtotal = array_reduce($_SESSION['cart'], function($carry, $games) {
+//    return $carry + ($games['price'] * $games['quantity']);
+//}, 0);
+
+//$tax = $subtotal * 0.15;
+//$total = $subtotal + $tax;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,14 +150,14 @@
         background-color: #4a3557;
     }
 
-    .cart-items {
+    .cart-gamess {
         display: flex;
         flex-direction: column;
         gap: 20px;
         margin-bottom: 30px;
     }
 
-    .cart-item {
+    .cart-games {
         display: flex;
         background: rgba(42, 44, 77, 0.7);
         padding: 20px;
@@ -136,7 +169,7 @@
         transition: all 0.3s ease;
     }
 
-    .item-image {
+    .games-image {
         width: 120px;
         height: 120px;
         object-fit: cover;
@@ -144,26 +177,26 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .item-details {
+    .games-details {
         flex: 1;
         text-align: left;
     }
 
-    .item-details h3 {
+    .games-details h3 {
         color: #ebe1de;
         margin-bottom: 10px;
         font-size: 18px;
         text-align: left;
     }
 
-    .item-details p {
+    .games-details p {
         color: #99dfec;
         margin-bottom: 5px;
         font-size: 14px;
         text-align: left;
     }
 
-    .remove-item {
+    .remove-games {
         background: #cf4d8f;
         color: white;
         border: none;
@@ -178,7 +211,7 @@
         transition: all 0.3s;
     }
 
-    .remove-item:hover {
+    .remove-games:hover {
         background: #b43d7d;
     }
 
@@ -335,12 +368,12 @@
             gap: 15px;
         }
 
-        .cart-item {
+        .cart-games {
             flex-direction: column;
             align-items: flex-start;
         }
 
-        .item-image {
+        .games-image {
             width: 100%;
             height: auto;
             max-height: 200px;
@@ -405,54 +438,56 @@
         <div class="cart-header">
             <h2>Your Cart</h2>
             <div class="cart-actions">
-                <button class="remove-all-btn" id="removeAllBtn">
-                    <i class="fas fa-trash-alt"></i> Remove All
-                </button>
+                <form method="post" style="display: inline;">
+                    <button type="submit" name="remove_all" class="remove-all-btn" id="removeAllBtn">
+                        <i class="fas fa-trash-alt"></i> Remove All
+                    </button>
+                </form>
                 <a href="wishlist.html" class="wishlist-btn">
                     <i class="fas fa-heart"></i> View Wishlist
                 </a>
             </div>
         </div>
         
-        <div class="cart-items" id="cartItemsContainer">
-            <div class="cart-item">
-                <img src="Media/Minecraft_poster.jpeg" alt="Minecraft" class="item-image">
-                <div class="item-details">
-                    <h3>Minecraft</h3>
-                    <p>Price: 109.00 <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"></p>
-                    <p>Quantity: 1</p>
-                    <button class="remove-item">
-                        <i class="fas fa-trash"></i> Remove
-                    </button>
+        <div class="cart-gamess" id="cartgamessContainer">
+            <?php if (empty($_SESSION['cart'])): ?>
+                <div class="empty-cart-message">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Your cart is empty</h3>
+                    <a href="gamestore.html">Continue Shopping</a>
                 </div>
-            </div>
-            
-            <div class="cart-item">
-                <img src="Media/StardewValley_poster.jpeg" alt="Stardew Valley" class="item-image">
-                <div class="item-details">
-                    <h3>Stardew Valley</h3>
-                    <p>Price: 47.00 <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"></p>
-                    <p>Quantity: 1</p>
-                    <button class="remove-item">
-                        <i class="fas fa-trash"></i> Remove
-                    </button>
-                </div>
-            </div>
+            <?php else: ?>
+                <?php foreach ($_SESSION['cart'] as $games): ?>
+                    <div class="cart-games">
+                        <img src="<?php echo htmlspecialchars($games['image']); ?>" alt="<?php echo htmlspecialchars($games['name']); ?>" class="games-image">
+                        <div class="games-details">
+                            <h3><?php echo htmlspecialchars($games['name']); ?></h3>
+                            <p>Price: <?php echo number_format($games['price'], 2); ?> <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"></p>
+                            <p>Quantity: <?php echo $games['quantity']; ?></p>
+                            <form method="post" style="display: inline;">
+                                <input type="hidden" name="remove_games" value="<?php echo $games['id']; ?>">
+                                <button type="submit" class="remove-games">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
-        
-        <div class="cart-summary" id="cartSummary">
+        <div class="cart-summary" id="cartSummary" <?php echo empty($_SESSION['cart']) ? 'style="display: none;"' : ''; ?>>
             <h3>Order Summary</h3>
             <div class="summary-row">
                 <span>Subtotal:</span>
-                <span>156.00 <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"></span>
+                <span><?php echo number_format($subtotal, 2); ?> <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"></span>
             </div>
             <div class="summary-row">
                 <span>Tax:</span>
-                <span>23.40 <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"></span>
+                <span><?php echo number_format($tax, 2); ?> <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"></span>
             </div>
             <div class="summary-row total-row">
                 <span>Total:</span>
-                <span>179.40 <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"></span>
+                <span><?php echo number_format($total, 2); ?> <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"></span>
             </div>
             <button class="checkout-btn" onclick="window.location.href='payment.html'">
                 Proceed to Checkout
@@ -475,32 +510,8 @@
     </button>
 
     <script>
-        document.getElementById('removeAllBtn').addEventListener('click', function() {
-            if(confirm('Are you sure you want to remove all items from your cart?')) {
-                document.getElementById('cartItemsContainer').innerHTML = `
-                    <div class="empty-cart-message">
-                        <i class="fas fa-shopping-cart"></i>
-                        <h3>Your cart is empty</h3>
-                        <a href="games.html">Continue Shopping</a>
-                    </div>
-                `;
-                document.getElementById('cartSummary').style.display = 'none';
-            }
-        });
-
-        document.querySelectorAll('.remove-item').forEach(button => {
-            button.addEventListener('click', function() {
-                const cartItem = this.closest('.cart-item');
-                cartItem.style.transform = 'translateX(-100%)';
-                cartItem.style.opacity = '0';
-                setTimeout(() => {
-                    cartItem.remove();
-                }, 300);
-            });
-        });
-
         const scrollToTopBtn = document.getElementById('scrollToTop');
-        
+    
         window.addEventListener('scroll', function() {
             if (window.pageYOffset > 300) {
                 scrollToTopBtn.classList.add('visible');
@@ -515,6 +526,7 @@
                 behavior: 'smooth'
             });
         });
+
     </script>
 </body>
 </html>

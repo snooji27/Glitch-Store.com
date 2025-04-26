@@ -1,0 +1,13 @@
+<?php
+$host = "loaclhost";
+$username = "root";
+$password = "";
+$database = "glitch_store";
+$conn = mysqli_connect($host, $username, $password, $database);
+//or die("Connection failed"); will be added later
+if($conn){
+   echo "Successful";
+}else{
+    die("Connection failed");
+}
+?>
