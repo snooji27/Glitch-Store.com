@@ -1,3 +1,25 @@
+<?php
+include 'db_connection.php';
+session_start();
+$user_id = $_SESSION['user_id'];
+
+$query = "SELECT * FROM users WHERE id = '$user_id'";
+$result = mysqli_query($conn, $query);
+$user = mysqli_fetch_assoc($result);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $bio = $_POST['bio'];
+
+    $update_query = "UPDATE users SET username = '$username', email = '$email', bio = '$bio' WHERE id = '$user_id'";
+    mysqli_query($conn, $update_query);
+
+    header("Location: userprofile.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,24 +53,19 @@
             <p class="bio">Update your info and personalize your account</p>
         </div>
 
-        <!-- Start of the form -->
-        <form class="edit-form" enctype="multipart/form-data">
+        <form class="edit-form" enctype="multipart/form-data" method="POST">
             <label>Username</label>
-            <input type="text" placeholder="PlayerOne">
+            <input type="text" name="username" value="<?php echo $user['username']; ?>" required>
+
+            <label>Email</label>
+            <input type="email" name="email" value="<?php echo $user['email']; ?>" required>
 
             <label>Bio</label>
-            <textarea rows="3" placeholder="Gamer | Collector | Trophy Hunter 🎮"></textarea>
-
-            <label>Profile Picture</label>
-            <input type="file" name="profile-picture" accept="image/*">
-
-            <label>Password</label>
-            <input type="password" placeholder="New Password">
+            <textarea name="bio" rows="3"><?php echo $user['bio']; ?></textarea>
 
             <button type="submit" class="settings-btn">Save Changes</button>
-            <a href="userprofile.html" class="settings-btn" style="background-color:#777;">Cancel</a>
+            <a href="userprofile.php" class="settings-btn" style="background-color:#777;">Cancel</a>
         </form>
-        <!-- End of the form -->
     </section>
 </main>
 
@@ -64,5 +81,3 @@
 
 </body>
 </html>
-
-
