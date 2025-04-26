@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../CSS/Forgot.css" />
+    <style>
+        .divider {
+          margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo-header">
+            <img src="../Media/icon2.png" alt="Glitch' Logo" width="100" />
+            <h1>Glitch</h1>
+        </div>
+        <div class="divider"></div>
+        <h2>Reset Password</h2>
+        <p>Enter your new password below.</p>
+
+        <form action="../PHP/reset_password.php" method="POST" autocomplete="on">
+            <div class="input-box">
+                <input type="password" placeholder="New Password" name="new_password" required minlength="6">
+                <i class='bx bxs-lock'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Confirm New Password" name="confirm_password" required minlength="6">
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <button type="submit" class="btn">Reset Password</button>
+        </form>
+
+        <a class="back-link" onclick="history.back()">&larr; Back</a>
+    </div>
+</body>
+
+</html>
