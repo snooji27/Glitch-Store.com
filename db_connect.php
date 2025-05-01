@@ -1,5 +1,5 @@
 <?php
-$host = "loaclhost";
+$host = "localhost";
 $username = "root";
 $password = "";
 $database = "glitch_store";
