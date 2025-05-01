@@ -1,10 +1,6 @@
 <?php
 session_start();
-
-$conn = new mysqli("localhost", "root", "", "glitch_store");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once "../db_connect.php";
 
 if (isset($_POST['step']) && $_POST['step'] === '1') {
     $_SESSION['signup_username'] = $_POST['username'];
@@ -31,12 +27,12 @@ if (isset($_POST['step']) && $_POST['step'] === '2') {
 
     $birthdate = sprintf('%04d-%02d-%02d', $year, $month, $day);
 
-    // Check age if less than 8 exit
+    // Check age if less than 13 exit
     $today = new DateTime();
     $dob = DateTime::createFromFormat('Y-m-d', $birthdate);
     $age = $dob ? $dob->diff($today)->y : 0;
 
-    if ($age < 8) {
+    if ($age < 13) {
         header("Location: ../Login_Signup/Too_young.html");
         exit();
     }

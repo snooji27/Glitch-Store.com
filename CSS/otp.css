@@ -1,0 +1,55 @@
+
+.container h3{
+    margin-bottom: auto;
+  }
+  
+  .code-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+
+  .code-inputs input {
+    width: 45px;
+    height: 55px;
+    font-size: 24px;
+    text-align: center;
+    border: 2px solid #8e6ea5;
+    border-radius: 10px;
+    background-color: #1e2128;
+    color: #ebe1de;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .code-inputs input:focus {
+    border-color: #cf4d8f;
+    background-color: #2a2c4d;
+  }
+
+  .code-inputs input:hover {
+    border-color: #cf4d8f;
+    background-color: #2a2c4d;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 3px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .btn.resend {
+    background-color: #44465a;
+    color: white;
+  }
+
+  .btn.resend:hover {
+    background-color: #8e6ea5;
+  }

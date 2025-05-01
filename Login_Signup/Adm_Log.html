@@ -6,34 +6,35 @@
         <title>Admin Login</title>
         <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="../CSS/Adm_Log.css" />
-    </head>
+        <script src="../JS/admin_login.js"></script>
+    </head>  
     <body>
         <div class="container">
             <div class="logo-header">
                 <img src="../Media/icon2.png" alt="Admin Logo" width="50" />
                 <h1>Admin Login</h1>
             </div>
-            <form action="../PHP/admin_login.php" method="POST">
+            <form action="admin_login.php" method="POST">
                 <div class="input-box">
                     <input type="text" name="username" placeholder="Username" required />
                     <i class="bx bxs-user"></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="password" placeholder="Password" required />
-                    <i class="bx bxs-lock-alt"></i>
+                    <input type="password" name="password" id="password" placeholder="Password" required />
+                    <i class="bx bxs-lock-alt" id="togglePassword" style="cursor: pointer;"></i>
                 </div>
                 <div class="forgot-link">
                     <a href="Forgot.html">Forgot Password?</a>
                 </div>
-                <button class="btn" type="submit">Login</button>
+                <button class="btn" type="submit">Log in</button>
             </form>
             <p>or log in with social platforms</p>
             <div class="social-icons">
-                <a href="#"><i class="bx bxl-google"></i></a>
-                <a href="#"><i class="bx bxl-facebook"></i></a>
-                <a href="#"><i class="bx bxl-github"></i></a>
-                <a href="#"><i class="bx bxl-linkedin"></i></a>
-            </div>
+                <a href="https://accounts.google.com/" target="_blank"><i class="bx bxl-google"></i></a>
+                <a href="https://www.facebook.com/" target="_blank"><i class="bx bxl-facebook"></i></a>
+                <a href="https://github.com/" target="_blank"><i class="bx bxl-github"></i></a>
+                <a href="https://www.linkedin.com/" target="_blank"><i class="bx bxl-linkedin"></i></a>
+            </div>            
             <div class="support-link">
                 <a href="support.html">Need help?</a>
             </div>

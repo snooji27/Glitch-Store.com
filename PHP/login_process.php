@@ -2,11 +2,7 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $conn = new mysqli("localhost", "root", "", "glitch_store");
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    require_once "../db_connect.php";
 
     $username = $conn->real_escape_string($_POST['username']);
     $password = $_POST['password'];

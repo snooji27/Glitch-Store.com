@@ -1,10 +1,6 @@
 <?php
 session_start();
-$conn = new mysqli("localhost", "root", "", "glitch_store");
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once "../db_connect.php";
 
 if (!isset($_SESSION['email'])) {
     echo "<script>alert('Session expired. Please try again.'); window.location.href='../Login_Signup/Forgot.html';</script>";
