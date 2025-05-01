@@ -1,0 +1,52 @@
+.container h2 {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.container p {
+    font-size: 12px;
+    margin-bottom: 30px;
+    color: #ebe1de;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #cf4d8f;
+  margin: 30px 0 40px;
+}
+
+.dob-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+select {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #cf4d8f;
+  background-color: #2a2c4d;
+  color: #ebe1de;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+.dob-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #cf4d8f;
+  color: #2a2c4d;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dob-btn:hover {
+  background-color: #ff77b0;
+  color: white;
+}

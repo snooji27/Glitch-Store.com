@@ -7,75 +7,8 @@
   <title>Forgot Password</title>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
   <link rel="stylesheet" href="../CSS/Forgot.css" />
-  
-  <style>
-    .container h3{
-      margin-bottom: auto;
-    }
-    
-    .code-inputs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 25px;
-    }
-
-    .code-inputs input {
-      width: 45px;
-      height: 55px;
-      font-size: 24px;
-      text-align: center;
-      border: 2px solid #8e6ea5;
-      border-radius: 10px;
-      background-color: #1e2128;
-      color: #ebe1de;
-      outline: none;
-      transition: all 0.3s ease;
-    }
-
-    .code-inputs input:focus {
-      border-color: #cf4d8f;
-      background-color: #2a2c4d;
-    }
-
-    .code-inputs input:hover {
-      border-color: #cf4d8f;
-      background-color: #2a2c4d;
-    }
-
-    .btn {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      margin: 3px;
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-
-    .btn.resend {
-      background-color: #44465a;
-      color: white;
-    }
-
-    .btn.resend:hover {
-      background-color: #8e6ea5;
-    }
-
-    .btn.alt {
-      background-color: #59406b;
-      color: #ebe1de;
-    }
-
-    .btn.alt:hover {
-      background-color: #8e6ea5;
-    }
-    .divider {
-      margin-bottom: 30px;
-    }
-  </style>
+  <link rel="stylesheet" href="../CSS/otp.css" />
+  <script src="../JS/otp-handler.js"></script>
 </head>
 
 <body>
@@ -89,36 +22,18 @@
     <p>Enter the 6-digit security code we sent to</p>
     <h3>a**********t@gmail.com</h3>
 
-    <form action="../PHP/forgot_password.php" method="POST">
+    <form action="verify_otp.php" method="POST">
       <div class="code-inputs">
-        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" name="code1">
-        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" name="code2">
-        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" name="code3">
-        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" name="code4">
-        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" name="code5">
-        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" name="code6">
+        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" name="code1" required>
+        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" name="code2" required>
+        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" name="code3" required>
+        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" name="code4" required>
+        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" name="code5" required>
+        <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" name="code6" required>
       </div>
-      <button type="submit" class="btn alt">Continue</button>
-      <button type="submit" name="resend" value="1" class="btn resend">Resend code</button>
+
+      <button type="button" class="btn resend" onclick="window.location.href='OTP.html'">Resend code</button>
     </form>
   </div>
-
-  <script>
-    const inputs = document.querySelectorAll('.code-inputs input');
-
-    inputs.forEach((input, index) => {
-      input.addEventListener('input', () => {
-        if (input.value.length === 1 && index < inputs.length - 1) {
-          inputs[index + 1].focus();
-        }
-      });
-
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' && input.value === '' && index > 0) {
-          inputs[index - 1].focus();
-        }
-      });
-    });
-  </script>
 </body>
 </html>

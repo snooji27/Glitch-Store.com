@@ -1,10 +1,6 @@
 <?php
 session_start();
-$conn = new mysqli("localhost", "root", "", "glitch_store");
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once "../db_connect.php";
 
 if (isset($_POST['resend']) && $_POST['resend'] == '1') {
     if (isset($_SESSION['email'])) {
