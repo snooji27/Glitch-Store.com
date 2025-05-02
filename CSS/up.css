@@ -198,6 +198,36 @@ nav ul li a:hover::after {
     border-radius: 8px;
     text-align: left;
 }
+.password-container {
+    position: relative;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 30px;
+    box-sizing: border-box;
+}
+
+.password-container i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+}
+/* Success Message Styling */
+#success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.5s;
+    display: none; /* hide by default */
+}
 
 /*  SETTINGS STYLE */
 .settings-section {
