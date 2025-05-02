@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $db_password)) {
             $_SESSION['admin_id'] = $id;
             $_SESSION['username'] = $db_username;
-            header("Location: /Glitch-Store.com-main/admin.html");
+            header("Location: /Glitch-Store.com-main/admin.php");
             exit();
         } else {
             header("Location: /Glitch-Store.com-main/Login_Signup/Adm_Log.html?error=wrongpassword");

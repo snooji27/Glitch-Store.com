@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $db_password)) {
             $_SESSION['user_id'] = $id;
             $_SESSION['username'] = $db_username;
-            header("Location: /Glitch-Store.com-main/gamestore.html");
+            header("Location: /Glitch-Store.com-main/gamestore.php");
             exit();
         } else {
             header("Location: /Glitch-Store.com-main/Login_Signup/User_Login_Signup.html?error=wrongpassword");
