@@ -426,7 +426,7 @@ if (isset($_POST['remove_all'])) {
         <nav>
             <ul>
                 <li><a href="Homepage.html">HOME</a></li>
-                <li><a href="gamestore.html">GAMES</a></li>
+                <li><a href="gamestore.php">GAMES</a></li>
                 <li><a href="gamesowned.html">GAMES OWNED</a></li>
                 <li><a href="Homepage.html/#about">ABOUT US</a></li>
                 <li><a href="support.html">SUPPORT</a></li>
@@ -454,7 +454,7 @@ if (isset($_POST['remove_all'])) {
                 <div class="empty-cart-message">
                     <i class="fas fa-shopping-cart"></i>
                     <h3>Your cart is empty</h3>
-                    <a href="gamestore.html">Continue Shopping</a>
+                    <a href="gamestore.php">Continue Shopping</a>
                 </div>
             <?php else: ?>
                 <?php foreach ($_SESSION['cart'] as $games): ?>
