@@ -24,7 +24,7 @@ body {
 /* Header */
 header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
     background: rgba(26, 26, 26, 0.8);
@@ -41,10 +41,9 @@ header {
 
 /* Logo Styling */
 .logo-container {
-    position: absolute;
-    left: 40px;
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 .header-logo {
@@ -57,10 +56,10 @@ header {
     transform: rotate(10deg);
 }
 
+/* Navigation */
 nav {
     display: flex;
-    justify-content: center;
-    width: 100%;
+    gap: 40px;
 }
 
 nav ul {
@@ -69,7 +68,6 @@ nav ul {
     gap: 40px;
     padding: 0;
     margin: 0;
-    justify-content: center;
 }
 
 nav ul li {
@@ -126,44 +124,12 @@ nav ul li a:hover::after {
         font-size: 14px;
     }
 }
+
 /*--------------------Header ends--------------------*/
 
-/* Header Login/Signup Buttons */
-.login-btn {
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.signup-btn {
-    background: #cf4d8f;
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.login-btn:hover {
-    color: #cf4d8f;
-}
-
-.signup-btn:hover {
-    background: #b83d7a;
-}
-/* SAR icon */
-.game-info p img.SAR {
-  width: 15px !important;
-  height: 15px !important;
-  display: inline-block !important;
-  vertical-align: middle !important;
-  content: url('../Media/SAR_Symbol-white.png') !important;
-}
 
 /* Footer */
-footer {
+/* footer {
     padding: 20px;
     background: rgba(26, 26, 26, 0.8);
     backdrop-filter: blur(10px);
@@ -219,88 +185,17 @@ footer p {
     footer {
         padding: 15px;
     }
-    
+
     .footer-social {
         gap: 20px;
     }
-    
+
     .footer-social a {
         font-size: 14px;
     }
-}
+} */
 
-/* footer end*/
-
-
-.logo-container {
-    position: absolute;
-    left: 40px;
-    display: flex;
-    align-items: center;
-}
-
-.header-logo {
-    width: 60px;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-
-.header-logo:hover {
-    transform: rotate(10deg);
-}
-
-nav {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 40px;
-    padding: 0;
-    margin: 0;
-    justify-content: center;
-}
-
-nav ul li {
-    display: inline;
-    position: relative;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    padding: 6px 0;
-}
-
-nav ul li a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 1px;
-    bottom: 0;
-    left: 0;
-    background: #ffffff;
-    transition: width 0.3s ease;
-}
-
-nav ul li a:hover {
-    color: #ffffff;
-    opacity: 0.8;
-}
-
-nav ul li a:hover::after {
-    width: 100%;
-}
-
-
+/*--------------------Footer ends--------------------*/
 
 
 /* ------Main container------ */
@@ -433,7 +328,7 @@ nav ul li a:hover::after {
     margin-bottom: 20px;
 }
 
-.add-cart {
+/* .add-cart {
     background-color: #30213a;
     color: white;
     padding: 12px 30px;
@@ -445,16 +340,16 @@ nav ul li a:hover::after {
 
 .add-cart:hover {
     background-color: #cf4d8f;
-}
+} */
 
-.cart-form {
+/* .cart-form {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-top: 10px;
-}
+} */
 
-.quantity-input {
+/* .quantity-input {
     width: 60px;
     padding: 8px;
     font-size: 1rem;
@@ -462,25 +357,7 @@ nav ul li a:hover::after {
     border: none;
     background-color: #222;
     color: white;
-}
-
-.cart-form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.quantity-input {
-    width: 60px;
-    padding: 8px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: none;
-    background-color: #222;
-    color: white;
-}
-
+} */
 
 /*--------------------------------------------------------------*/
 .purchase-section {
@@ -511,15 +388,14 @@ nav ul li a:hover::after {
     -webkit-appearance: none;
     margin: 0;
 }
+
 /*--------------------------------------------------------------*/
+
 @media (max-width: 768px) {
     .purchase-section {
         flex-wrap: wrap;
     }
-}
 
-/* Responsive */
-@media (max-width: 768px) {
     .game-detail-container {
         flex-direction: column;
     }
