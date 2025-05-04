@@ -7,9 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// $database = new $Database();
-// $database->connect();
-
 if (isset($_POST['remove_all'])) {
     $_SESSION['cart'] = [];
     header('Location: cart.php');
