@@ -2,6 +2,22 @@
 session_start();
 include 'db_connect.php';
 
+// Ensure cart count is set
+if (!isset($_SESSION['cart_count']) && isset($_SESSION['user_id'])) {
+    $stmt = $conn->prepare("
+        SELECT COUNT(*) AS item_count
+        FROM cartitem
+        WHERE cart_id = (
+            SELECT cart_id FROM cart WHERE user_id = ?
+        )
+    ");
+    $stmt->bind_param("i", $_SESSION['user_id']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $_SESSION['cart_count'] = $result->fetch_assoc()['item_count'] ?? 0;
+}
+
+// Handle Add to Cart
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $gameId = intval($_POST['game_id']);
     $quantity = intval($_POST['quantity']);
@@ -13,41 +29,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 
     $userId = $_SESSION['user_id'];
 
-    $check = "SELECT * FROM cartitem WHERE user_id = ? AND game_id = ?";
-    $stmt = mysqli_prepare($conn, $check);
-    if (!$stmt) {
-        echo json_encode(['error' => 'Failed to prepare statement']);
+    // Get cart_id
+    $stmt = $conn->prepare("SELECT cart_id FROM cart WHERE user_id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $cart = $res->fetch_assoc();
+    if (!$cart) {
+        echo json_encode(['error' => 'Cart not found']);
         exit();
     }
+    $cartId = $cart['cart_id'];
 
-    mysqli_stmt_bind_param($stmt, "ii", $userId, $gameId);
+    // Check if game already in cart
+    $check = "SELECT * FROM cartitem WHERE cart_id = ? AND game_id = ?";
+    $stmt = mysqli_prepare($conn, $check);
+    mysqli_stmt_bind_param($stmt, "ii", $cartId, $gameId);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $exists = mysqli_num_rows($result) > 0;
 
     if ($exists) {
-        $update = "UPDATE cartitem SET quantity = quantity + ? WHERE user_id = ? AND game_id = ?";
+        $update = "UPDATE cartitem SET quantity = quantity + ? WHERE cart_id = ? AND game_id = ?";
         $stmt = mysqli_prepare($conn, $update);
-        if (!$stmt) {
-            echo json_encode(['error' => 'Failed to prepare update statement']);
-            exit();
-        }
-        mysqli_stmt_bind_param($stmt, "iii", $quantity, $userId, $gameId);
+        mysqli_stmt_bind_param($stmt, "iii", $quantity, $cartId, $gameId);
         mysqli_stmt_execute($stmt);
     } else {
-        $insert = "INSERT INTO cartitem (user_id, game_id, quantity) VALUES (?, ?, ?)";
+        $insert = "INSERT INTO cartitem (cart_id, game_id, quantity) VALUES (?, ?, ?)";
         $stmt = mysqli_prepare($conn, $insert);
-        if (!$stmt) {
-            echo json_encode(['error' => 'Failed to prepare insert statement']);
-            exit();
-        }
-        mysqli_stmt_bind_param($stmt, "iii", $userId, $gameId, $quantity);
+        mysqli_stmt_bind_param($stmt, "iii", $cartId, $gameId, $quantity);
         mysqli_stmt_execute($stmt);
 
         if (!isset($_SESSION['cart_count'])) {
             $_SESSION['cart_count'] = 0;
         }
-        $_SESSION['cart_count'] += 1;
+        $_SESSION['cart_count'] += 1; // Only count unique items
     }
 
     echo json_encode(['success' => true, 'newItem' => !$exists]);
@@ -266,6 +282,16 @@ if (!$game) {
 <body>
 
 <?php include "include/header_and_nav.php" ?>
+<?php
+if (!isset($_SESSION['cart_count']) && isset($_SESSION['user_id'])) {
+    $stmt = $conn->prepare("SELECT COUNT(*) AS item_count FROM cartitem WHERE user_id = ?");
+    $stmt->bind_param("i", $_SESSION['user_id']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $count = $result->fetch_assoc()['item_count'] ?? 0;
+    $_SESSION['cart_count'] = $count;
+}
+?>
 
 <main class="game-page-wrapper">
   <section class="game-detail-container" style="display: flex; gap: 30px; margin: 50px;">

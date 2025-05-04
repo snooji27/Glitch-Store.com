@@ -5,10 +5,15 @@
   <nav>
     <ul>
       <li>
-      <a href="cart.php" class="cart-icon">
-          <i class="fas fa-shopping-cart"></i>
-          <span id="cart-count">
-          </span>
+      <div class="cart-icon">
+        <a href="cart.php"><i class="fas fa-shopping-cart fa-lg"></i></a>
+        <?php if (isset($_SESSION['cart_count']) && $_SESSION['cart_count'] > 0): ?>
+        <span id="cart-count"><?= $_SESSION['cart_count'] ?></span>
+        <?php else: ?>
+        <span id="cart-count">0</span>
+        <?php endif; ?>
+        </div>
+
       </a>
       </li>
       <li><a href="homepage.html">Home</a></li>
@@ -21,3 +26,4 @@
     </ul>
   </nav>
 </header>
+
