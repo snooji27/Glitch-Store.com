@@ -63,7 +63,7 @@ if (mysqli_num_rows($result) > 0) {
         $purchase_date = date('d/m/Y', strtotime($row['purchase_date']));
         ?>
         <div class="game-card">
-            <img src="<?php echo $game_image; ?>" alt="<?php echo $game_title; ?>">
+            <img src="Media/<?php echo $game_image; ?>" alt="<?php echo $game_title; ?>">
             <h3><?php echo $game_title; ?></h3>
             <p>Purchase Date: <?php echo $purchase_date; ?></p>
             <button onclick="window.location.href='<?php echo $game_download; ?>'">Download</button>
@@ -78,15 +78,6 @@ mysqli_free_result($result);
         </section>
     </main>
     
-     <!-- footer should be here--> 
-     <footer id="contact">
-  <div class="footer-social">
-    <a href="#"><i class="fab fa-discord"></i></a>
-    <a href="#"><i class="fab fa-twitch"></i></a>
-    <a href="#"><i class="fab fa-youtube"></i></a>
-    <a href="#"><i class="fab fa-twitter"></i></a>
-  </div>
-  <p>&copy; 2025 GLITCH Game Store | All Rights Reserved</p>
-</footer>
+    <?php include "include/footer.php" ?>
 </body>
 </html>

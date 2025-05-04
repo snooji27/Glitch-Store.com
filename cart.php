@@ -1,32 +1,115 @@
 <?php 
 session_start();
-require_once ('db_connect.php');
+require_once 'db_connect.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php?redirect=cart.php');
+    header('Location: login.php');
     exit;
 }
 
+// Handle remove all items
 if (isset($_POST['remove_all'])) {
-    $_SESSION['cart'] = [];
+    $user_id = $_SESSION['user_id'];
+    
+    // Get cart ID
+    $sql = "SELECT cart_id FROM CART WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $cart_id = $row['cart_id'];
+        
+        // Delete all cart items
+        $sql = "DELETE FROM CartItem WHERE cart_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $cart_id);
+        $stmt->execute();
+        
+        // Update cart total
+        $sql = "UPDATE CART SET total = 0 WHERE cart_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $cart_id);
+        $stmt->execute();
+    }
+    
     header('Location: cart.php');
     exit;
 }
 
-//if (isset($_POST['remove_games'])){
-//    $game_id = $_POST['remove_games'];
-//    $_SESSION['cart'] = array_filter($_SESSION['cart'], function($games) use($game_id) {return $games('id') != $game_id};
-//});
-//header('Location: cart.php');
-//exit;
-//}
+// Handle remove single item
+if (isset($_POST['remove_games'])) {
+    $game_id = $_POST['remove_games'];
+    $user_id = $_SESSION['user_id'];
+    
+    // Get cart ID
+    $sql = "SELECT cart_id FROM CART WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $cart_id = $row['cart_id'];
+        
+        // Delete the cart item
+        $sql = "DELETE FROM CartItem WHERE cart_id = ? AND game_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $cart_id, $game_id);
+        $stmt->execute();
+        
+        // Update cart total
+        $sql = "UPDATE CART c 
+                SET c.total = (
+                    SELECT IFNULL(SUM(ci.unit_price * ci.quantity), 0)
+                    FROM CartItem ci
+                    WHERE ci.cart_id = ?
+                )
+                WHERE c.cart_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $cart_id, $cart_id);
+        $stmt->execute();
+    }
+    
+    header('Location: cart.php');
+    exit;
+}
 
-//$subtotal = array_reduce($_SESSION['cart'], function($carry, $games) {
-//    return $carry + ($games['price'] * $games['quantity']);
-//}, 0);
+// Get cart items
+$cart_items = [];
+$subtotal = 0;
+$tax = 0;
+$total = 0;
 
-//$tax = $subtotal * 0.15;
-//$total = $subtotal + $tax;
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT g.game_id, g.title, g.price, g.image_url, ci.quantity, ci.unit_price
+        FROM CART c
+        JOIN CartItem ci ON c.cart_id = ci.cart_id
+        JOIN GAME g ON ci.game_id = g.game_id
+        WHERE c.user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$cart_items = $result->fetch_all(MYSQLI_ASSOC);
+
+// Calculate totals
+foreach ($cart_items as $item) {
+    $subtotal += $item['unit_price'] * $item['quantity'];
+}
+$tax = $subtotal * 0.15;
+$total = $subtotal + $tax;
+
+// Get wishlist count for header
+$sql = "SELECT COUNT(*) as count FROM Wishlist WHERE user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$wishlistCount = $result->fetch_assoc()['count'] ?? 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +134,6 @@ if (isset($_POST['remove_all'])) {
         line-height: 1.6;
         padding-bottom: 100px;
     }
-
 
     .SAR {
         width: 15px;
@@ -392,14 +474,6 @@ if (isset($_POST['remove_all'])) {
             height: 40px;
             font-size: 16px;
         }
-        /* Nav and Buttons Wrapper */
-    .nav-auth-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 20px; 
-        justify-content: center;
-        margin: 0 auto;
-        }
     }
 
     @media (max-width: 480px) {
@@ -415,21 +489,7 @@ if (isset($_POST['remove_all'])) {
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="Media/icon2.png" alt="Logo" class="header-logo">
-        </div>
-        <div class="nav-auth-wrapper">
-        <nav>
-            <ul>
-                <li><a href="Homepage.html">HOME</a></li>
-                <li><a href="gamestore.php">GAMES</a></li>
-                <li><a href="gamesowned.php">GAMES OWNED</a></li>
-                <li><a href="Homepage.html/#about">ABOUT US</a></li>
-                <li><a href="support.html">SUPPORT</a></li>
-            </ul>
-        </nav>
-    </header>
+<?php include "include/header_and_nav.php" ?>
 
     <main class="cart">
         <div class="cart-header">
@@ -440,29 +500,29 @@ if (isset($_POST['remove_all'])) {
                         <i class="fas fa-trash-alt"></i> Remove All
                     </button>
                 </form>
-                <a href="wishlist.html" class="wishlist-btn">
+                <a href="wishlist.php" class="wishlist-btn">
                     <i class="fas fa-heart"></i> View Wishlist
                 </a>
             </div>
         </div>
         
         <div class="cart-gamess" id="cartgamessContainer">
-            <?php if (empty($_SESSION['cart'])): ?>
+            <?php if (empty($cart_items)): ?>
                 <div class="empty-cart-message">
                     <i class="fas fa-shopping-cart"></i>
                     <h3>Your cart is empty</h3>
-                    <a href="gamestore.php">Continue Shopping</a>
+                    <a href="gamestore.html">Continue Shopping</a>
                 </div>
             <?php else: ?>
-                <?php foreach ($_SESSION['cart'] as $games): ?>
+                <?php foreach ($cart_items as $item): ?>
                     <div class="cart-games">
-                        <img src="<?php echo htmlspecialchars($games['image']); ?>" alt="<?php echo htmlspecialchars($games['name']); ?>" class="games-image">
+                        <img src="Media/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>" class="games-image">
                         <div class="games-details">
-                            <h3><?php echo htmlspecialchars($games['name']); ?></h3>
-                            <p>Price: <?php echo number_format($games['price'], 2); ?> <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"></p>
-                            <p>Quantity: <?php echo $games['quantity']; ?></p>
+                            <h3><?php echo htmlspecialchars($item['title']); ?></h3>
+                            <p>Price: <?php echo number_format($item['price'], 2); ?> <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"></p>
+                            <p>Quantity: <?php echo $item['quantity']; ?></p>
                             <form method="post" style="display: inline;">
-                                <input type="hidden" name="remove_games" value="<?php echo $games['id']; ?>">
+                                <input type="hidden" name="remove_games" value="<?php echo $item['game_id']; ?>">
                                 <button type="submit" class="remove-games">
                                     <i class="fas fa-trash"></i> Remove
                                 </button>
@@ -472,7 +532,7 @@ if (isset($_POST['remove_all'])) {
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
-        <div class="cart-summary" id="cartSummary" <?php echo empty($_SESSION['cart']) ? 'style="display: none;"' : ''; ?>>
+        <div class="cart-summary" id="cartSummary" <?php echo empty($cart_items) ? 'style="display: none;"' : ''; ?>>
             <h3>Order Summary</h3>
             <div class="summary-row">
                 <span>Subtotal:</span>
@@ -492,15 +552,7 @@ if (isset($_POST['remove_all'])) {
         </div>
     </main>
 
-    <footer id="contact">
-        <div class="footer-social">
-            <a href="#"><i class="fab fa-discord"></i></a>
-            <a href="#"><i class="fab fa-twitch"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-        </div>
-        <p>&copy; 2025 GLITCH Game Store | All Rights Reserved</p>
-    </footer>
+    <?php include "include/footer.php" ?>
 
     <button id="scrollToTop" class="scroll-to-top">
         <i class="fas fa-arrow-up"></i>
@@ -523,7 +575,6 @@ if (isset($_POST['remove_all'])) {
                 behavior: 'smooth'
             });
         });
-
     </script>
 </body>
 </html>

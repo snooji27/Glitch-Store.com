@@ -17,16 +17,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $image_url = $_POST['image_url'];
     $release_date = $_POST['release_date'];
     $price = $_POST['price'];
+    $stock = $_POST['stock_quant'];
 
+//og way
+    // $update = "UPDATE game SET title=?, category=?, description=?, image_url=?, release_date=?, price=? WHERE game_id=?";
+    // $stmt = $conn->prepare($update);
+    // $stmt->bind_param("ssssssi", $title, $category, $description, $image_url, $release_date, $price, $game_id);
+  //   if ($stmt->execute()) {
+  //     header("Location: view_games.php");
+  //     exit;
+  // } else {
+  //     echo "Failed to add game.";
+  // }
+
+    //new way
     $update = "UPDATE game SET title=?, category=?, description=?, image_url=?, release_date=?, price=? WHERE game_id=?";
     $stmt = $conn->prepare($update);
     $stmt->bind_param("ssssssi", $title, $category, $description, $image_url, $release_date, $price, $game_id);
+ 
+    $insert1 = "INSERT INTO stock (stock_quant) VALUES (?)";
+    $stmt1 = $conn->prepare($insert1);
+    $stmt1->bind_param("i",$stock);
 
-    if ($stmt->execute()) {
+    if ($stmt && $stmt1->execute()) {
         header("Location: view_games.php");
         exit;
     } else {
-        echo "Failed to update game.";
+        echo "Failed to add game.";
     }
 }
 

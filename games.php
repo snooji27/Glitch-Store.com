@@ -258,7 +258,7 @@ if (!$game) {
       margin-right: 5px;
     }
 
-    #help-button {
+    .help-button {
       display: inline-block;
       margin-left: 10px;
       background-color: #cf4d8f;
@@ -273,7 +273,7 @@ if (!$game) {
       font-weight: bold;
       transition: background-color 0.3s ease;
     }
-    #help-button:hover {
+    .help-button:hover {
       background-color: #b83d7a;
     }
   </style>
@@ -302,7 +302,7 @@ if (!isset($_SESSION['cart_count']) && isset($_SESSION['user_id'])) {
     <div class="game-info">
       <h1 class="game-title">
         <?= htmlspecialchars($game['title']) ?>
-        <span id="help-button" title="Click for help">?</span>
+        <span class="help-button" title="Click for help">?</span>
       </h1>
       <p class="game-price">
         <img src="Media/SAR_Symbol-white.png" class="SAR"><?= htmlspecialchars($game['price']) ?>
@@ -323,8 +323,14 @@ if (!isset($_SESSION['cart_count']) && isset($_SESSION['user_id'])) {
         <input type="hidden" name="game_id" value="<?= $game_id ?>">
         <input type="hidden" name="add_to_cart" value="1">
         <button type="submit" class="btn add-cart">Add to Cart</button>
+        <form method="post" action="wishlist.php">
+        <input type="hidden" name="wishlist_game_id" value="<?= $game['game_id'] ?>">
+        <button type="submit" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></button>
+        </form>
+
       </form>
     </div>
+    
   </section>
 </main>
 
