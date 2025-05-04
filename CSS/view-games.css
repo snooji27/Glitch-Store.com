@@ -8,6 +8,42 @@ body.view-games {
 }
 /*-----------------Header style-------------------- */
 
+/*Search Bar Styles*/ 
+.search {
+  --padding: 8px;
+      width: max-content; 
+      display: flex;
+      align-items: center;
+      padding: var(--padding);  
+      border-radius: 28px; 
+      background: rgba(30, 30, 47, 0.8);
+      transition: box-shadow 0.25s;
+      margin: 10px auto;
+      
+  }
+  
+  .search focus-within{
+      box-shadow: 0 0 2px rgba(255, 255, 255, 0.3) ;
+  } 
+  .search-icon {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-left: var(--padding);
+}
+
+  .search-input { 
+      font-size: 14px; 
+      font-family: 'Inter', sans-serif;
+      margin-left: var(--padding);
+      outline: none;
+      border: none;
+      background: transparent;
+      width: 300px;  
+  }
+   .search-input placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 /* Header */
 header {
 display: flex;
