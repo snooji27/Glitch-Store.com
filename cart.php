@@ -546,7 +546,7 @@ $wishlistCount = $result->fetch_assoc()['count'] ?? 0;
                 <span>Total:</span>
                 <span><?php echo number_format($total, 2); ?> <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"></span>
             </div>
-            <button class="checkout-btn" onclick="window.location.href='payment.html'">
+            <button class="checkout-btn" onclick="window.location.href='payment.php'">
                 Proceed to Checkout
             </button>
         </div>

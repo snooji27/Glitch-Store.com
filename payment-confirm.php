@@ -1,3 +1,49 @@
+<?php
+session_start();
+require_once 'db_connect.php';
+
+// Check if order_id is provided
+if (!isset($_GET['order_id']) || !isset($_SESSION['user_id'])) {
+    header('Location: Homepage.html');
+    exit;
+}
+
+$order_id = $_GET['order_id'];
+$user_id = $_SESSION['user_id'];
+
+// Get order details
+$order_sql = "SELECT o.order_id, o.total_price, o.tax, o.order_date, 
+                     p.First, p.Last, p.cardNum, p.PhoneNum, p.City, p.Country, p.ZIP
+              FROM ORDER o
+              JOIN Payment p ON o.payment_id = p.payment_id
+              WHERE o.order_id = ? AND o.user_id = ?";
+$stmt = $conn->prepare($order_sql);
+$stmt->bind_param("ii", $order_id, $user_id);
+$stmt->execute();
+$order_result = $stmt->get_result();
+
+if ($order_result->num_rows === 0) {
+    header('Location: Homepage.html');
+    exit;
+}
+
+$order = $order_result->fetch_assoc();
+$subtotal = $order['total_price'] - $order['tax'];
+
+// Get order items
+$items_sql = "SELECT g.title, g.image_url, oi.price_at_purchase, oi.quantity
+              FROM OrderItem oi
+              JOIN GAME g ON oi.game_id = g.game_id
+              WHERE oi.order_id = ?";
+$stmt = $conn->prepare($items_sql);
+$stmt->bind_param("i", $order_id);
+$stmt->execute();
+$items = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+// Format card number for display
+$card_last4 = substr($order['cardNum'], -4);
+$card_type = (str_starts_with($order['cardNum'], '4')) ? 'Visa' : 'Mastercard';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,15 +77,6 @@
             padding-bottom: 100px;
         }
         
-        /* Nav and Buttons Wrapper */
-        .nav-auth-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 20px; 
-            justify-content: center;
-            margin: 0 auto;
-        }
-
         /* Typography */
         .page-title {
             text-align: left;
@@ -187,23 +224,26 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .agree-terms {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .order-success {
+            text-align: center;
             margin-bottom: 20px;
+            color: #4CAF50;
+            font-size: 18px;
         }
 
-        .agree-terms input {
-            min-width: 18px;
-            min-height: 18px;
-        }
-
-        .agree-terms label {
+        .order-number {
+            text-align: center;
+            margin-bottom: 20px;
             color: #ebe1de;
         }
 
-        .purchase-btn {
+        .order-date {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #99dfec;
+        }
+
+        .continue-btn {
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -214,37 +254,33 @@
             width: 100%;
             font-weight: bold;
             transition: background-color 0.3s;
+            display: block;
+            text-align: center;
+            text-decoration: none;
         }
 
-        .purchase-btn:hover {
+        .continue-btn:hover {
             background-color: #45a049;
         }
 
-        /* Footer */
-        .footer {
-            width: 100%;
-            background: rgba(26, 26, 26, 0.8);
-            backdrop-filter: blur(10px);
-            text-align: center;
+        /* Billing Info */
+        .billing-info {
+            background-color: #2a2c4d;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .billing-details {
             padding: 15px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #1e1f3a;
+            border-radius: 5px;
+            margin-top: 15px;
         }
 
-        .footer-links {
-            margin: 0;
-        }
-
-        .footer-link {
-            color: #99dfec;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-
-        .footer-link:hover {
-            text-decoration: underline;
+        .billing-row {
+            margin-bottom: 10px;
         }
 
         /* Responsive Design */
@@ -255,7 +291,8 @@
 
             .order-summary, 
             .payment-method, 
-            .confirmation {
+            .confirmation,
+            .billing-info {
                 padding: 15px;
             }
 
@@ -269,7 +306,6 @@
                 text-align: left;
                 margin-top: 10px;
             }
-            
         }
 
         @media (max-width: 480px) {
@@ -289,68 +325,53 @@
     </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <div class="logo-container">
-            <img src="Media/icon2.png" alt="GLITCH Logo" class="header-logo">
-            <a href="userprofile.html" class="account-btn">Account</a>
-        </div>
-        <div class="nav-auth-wrapper">
-        <nav>
-            <ul>
-                <li><a href="Homepage.html">HOME</a></li>
-                <li><a href="gamestore.php">GAMES</a></li>
-                <li><a href="gamesowned.php">GAMES OWNED</a></li>
-                <li><a href="Homepage.html">ABOUT US</a></li>
-                <li><a href="support.html">CONTACT</a></li>
-            </ul>
-        </nav>
-        </div>
-    </header>
+    <?php include 'header_and_nav.php'; ?>
 
     <!-- Main Content -->
     <main class="confirm-container">
-        <h2 class="page-title">Review Your Order</h2>
+        <h2 class="page-title">Order Confirmation</h2>
+        
+        <div class="order-success">
+            <i class="fas fa-check-circle"></i> Thank you for your purchase!
+        </div>
+        
+        <div class="order-number">
+            Order #<?php echo htmlspecialchars($order_id); ?>
+        </div>
+        
+        <div class="order-date">
+            <?php echo date('F j, Y', strtotime($order['order_date'])); ?>
+        </div>
         
         <!-- Order Summary Section -->
         <section class="order-summary">
-            <h3 class="section-title">Items in Your Order</h3>
+            <h3 class="section-title">Items Purchased</h3>
             <div class="order-items">
-                
-                <!-- Item 1 -->
-                <article class="order-item">
-                    <img src="Media/Minecraft_poster.jpeg" alt="Minecraft" class="item-image">
-                    <div class="item-details">
-                        <h4 class="game-title">Minecraft</h4>
-                        <p class="game-quantity">1 ×    <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> 109.00</p>
-                    </div>
-                    <p class="item-price">   <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR">109.00</p>
-                </article>
-                
-                <!-- Item 2 -->
-                <article class="order-item">
-                    <img src="Media/StardewValley_poster.jpeg" alt="Stardew Valley" class="item-image">
-                    <div class="item-details">
-                        <h4 class="game-title">Stardew Valley</h4>
-                        <p class="game-quantity">1 ×    <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> 47.00</p>
-                    </div>
-                    <p class="item-price">   <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> 47.00</p>
-                </article>
+                <?php foreach ($items as $item): ?>
+                    <article class="order-item">
+                        <img src="<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>" class="item-image">
+                        <div class="item-details">
+                            <h4 class="game-title"><?php echo htmlspecialchars($item['title']); ?></h4>
+                            <p class="game-quantity"><?php echo $item['quantity']; ?> × <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> <?php echo number_format($item['price_at_purchase'], 2); ?></p>
+                        </div>
+                        <p class="item-price"><img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> <?php echo number_format($item['price_at_purchase'] * $item['quantity'], 2); ?></p>
+                    </article>
+                <?php endforeach; ?>
             </div>
             
             <!-- Order Totals -->
             <div class="order-totals">
                 <div class="total-row">
                     <span class="total-label">Subtotal:</span>
-                    <span class="total-value">   <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> 156.00</span>
+                    <span class="total-value"><img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> <?php echo number_format($subtotal, 2); ?></span>
                 </div>
                 <div class="total-row">
                     <span class="total-label">Tax:</span>
-                    <span class="total-value">   <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> 23.40</span>
+                    <span class="total-value"><img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> <?php echo number_format($order['tax'], 2); ?></span>
                 </div>
                 <div class="total-row grand-total">
                     <span class="total-label">Total:</span>
-                    <span class="total-value">   <img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> 179.40</span>
+                    <span class="total-value"><img src="Media/SAR_Symbol-white.png" alt="SAR currency logo" class="SAR"> <?php echo number_format($order['total_price'], 2); ?></span>
                 </div>
             </div>
         </section>
@@ -359,29 +380,34 @@
         <section class="payment-method">
             <h3 class="section-title">Payment Method</h3>
             <div class="method-details">
-                <span class="payment-type">Visa ending in 4242</span>
-                <a href="payment.html" class="change-method">Change</a>
+                <span class="payment-type"><?php echo htmlspecialchars($card_type); ?> ending in <?php echo htmlspecialchars($card_last4); ?></span>
+            </div>
+        </section>
+        
+        <!-- Billing Information -->
+        <section class="billing-info">
+            <h3 class="section-title">Billing Information</h3>
+            <div class="billing-details">
+                <div class="billing-row">
+                    <strong>Name:</strong> <?php echo htmlspecialchars($order['First'] . ' ' . $order['Last']); ?>
+                </div>
+                <div class="billing-row">
+                    <strong>Phone:</strong> <?php echo htmlspecialchars($order['PhoneNum']); ?>
+                </div>
+                <div class="billing-row">
+                    <strong>Address:</strong> <?php echo htmlspecialchars($order['City'] . ', ' . $order['Country'] . ' ' . $order['ZIP']); ?>
+                </div>
             </div>
         </section>
         
         <!-- Confirmation Section -->
         <section class="confirmation">
-            <div class="agree-terms">
-                <input type="checkbox" id="agree-terms" required>
-                <label for="agree-terms">I agree to the Terms of Service and authorize this payment</label>
-            </div>
-            <button class="purchase-btn" onclick="window.location.href='thankyou.html'">
-                Complete Purchase
-            </button>
+            <p>Your games have been added to your <a href="gamesowned.php" style="color: #99dfec;">Games Owned</a> library.</p>
+            <p>An order confirmation has been sent to your email.</p>
+            <a href="gamestore.php" class="continue-btn">Continue Shopping</a>
         </section>
     </main>
 
-    <!-- Footer Section -->
-    <footer class="footer">
-        <p class="footer-links">
-            <a href="#" class="footer-link">Contact Us</a> | 
-            <a href="#" class="footer-link">Support</a>
-        </p>
-    </footer>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

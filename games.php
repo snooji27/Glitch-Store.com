@@ -313,6 +313,11 @@ if (!isset($_SESSION['cart_count']) && isset($_SESSION['user_id'])) {
         <strong>Description:</strong><br> <?= nl2br(htmlspecialchars($game['description'])) ?>
       </p>
 
+      <form method="post" action="wishlist.php">
+        <input type="hidden" name="wishlist_game_id" value="<?= $game['game_id'] ?>">
+        <button type="submit" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></button>
+        </form>
+
       <form id="add-to-cart-form" method="post" style="margin-top: 20px;">
         <div class="quantity-control">
           <button type="button" onclick="changeQuantity(-1)">-</button>
@@ -323,10 +328,6 @@ if (!isset($_SESSION['cart_count']) && isset($_SESSION['user_id'])) {
         <input type="hidden" name="game_id" value="<?= $game_id ?>">
         <input type="hidden" name="add_to_cart" value="1">
         <button type="submit" class="btn add-cart">Add to Cart</button>
-        <form method="post" action="wishlist.php">
-        <input type="hidden" name="wishlist_game_id" value="<?= $game['game_id'] ?>">
-        <button type="submit" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></button>
-        </form>
 
       </form>
     </div>
