@@ -9,7 +9,7 @@ include 'db_connect.php';
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Game Store</title>
-  <link rel="stylesheet" href="/GlitchStore_PHP_CorePages/CSS/styleGamestore.css">
+  <link rel="stylesheet" href="CSS/styleGamestore.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body {
@@ -18,21 +18,20 @@ include 'db_connect.php';
       min-height: 100vh;
     }
 
-    /* header {
+    header {
       background-color: #111;
       padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: white;
-    } */
+    }
 
     nav ul {
       list-style: none;
       display: flex;
       gap: 20px;
     }
-
     nav ul li a {
       color: white;
       text-decoration: none;

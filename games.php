@@ -2,7 +2,6 @@
 session_start();
 include 'db_connect.php';
 
-// Process Add to Cart action (AJAX)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $gameId = intval($_POST['game_id']);
     $quantity = intval($_POST['quantity']);
@@ -82,7 +81,6 @@ if (!$game) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <style>
-/* Header Login/Signup Buttons */
     .login-btn {
         color: #fff;
         text-decoration: none;
@@ -90,7 +88,6 @@ if (!$game) {
         border-radius: 5px;
         transition: all 0.3s ease;
     }
-
     .signup-btn {
         background: #cf4d8f;
         color: #fff;
@@ -99,12 +96,10 @@ if (!$game) {
         border-radius: 5px;
         transition: all 0.3s ease;
     }
-
     .login-btn:hover {
         color: #cf4d8f;
         text-decoration: none;
     }
-
     .signup-btn:hover {
         background: #b83d7a;
         text-decoration: none;
@@ -123,20 +118,20 @@ if (!$game) {
       top: -10px;
       right: -10px;
     }
-    
+
     header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background: rgba(26, 26, 26, 0.8);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    height: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: rgba(26, 26, 26, 0.8);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      height: 60px;
     }
     nav ul {
       list-style: none;
@@ -184,8 +179,6 @@ if (!$game) {
     .btn.add-cart:hover {
         background: #b83d7a;
     }
-
-    /* Styling for the game image */
     .game-image-container {
       background: rgba(0, 0, 0, 0.6);
       padding: 20px;
@@ -201,8 +194,6 @@ if (!$game) {
       height: auto;
       border-radius: 8px;
     }
-
-    /* Footer */
     footer {
         padding: 20px;
         background: rgba(26, 26, 26, 0.8);
@@ -213,69 +204,65 @@ if (!$game) {
         position: relative;
         z-index: 1;
     }
-
     footer p {
         color: rgba(255, 255, 255, 0.7);
         font-size: 12px;
         margin: 10px 0 0 0;
     }
-
     .footer-social {
         display: flex;
         justify-content: center;
         gap: 25px;
         margin-bottom: 10px;
     }
-
     .footer-social a {
         color: rgba(255, 255, 255, 0.7);
         font-size: 16px;
         transition: all 0.3s ease;
         text-decoration: none;
     }
-
     .footer-social a:hover {
         color: #cf4d8f;
         transform: translateY(-2px);
     }
-
-    .footer-social .fa-discord:hover {
-        color: #7289da;
-    }
-
-    .footer-social .fa-twitch:hover {
-        color: #9146ff;
-    }
-
-    .footer-social .fa-youtube:hover {
-        color: #ff0000;
-    }
-
-    .footer-social .fa-twitter:hover {
-        color: #1da1f2;
-    }
+    .footer-social .fa-discord:hover { color: #7289da; }
+    .footer-social .fa-twitch:hover { color: #9146ff; }
+    .footer-social .fa-youtube:hover { color: #ff0000; }
+    .footer-social .fa-twitter:hover { color: #1da1f2; }
 
     @media (max-width: 768px) {
-        footer {
-            padding: 15px;
-        }
-
-        .footer-social {
-            gap: 20px;
-        }
-
-        .footer-social a {
-            font-size: 14px;
-        }
+        footer { padding: 15px; }
+        .footer-social { gap: 20px; }
+        .footer-social a { font-size: 14px; }
     }
+
     .SAR {
       width: 14px;
       vertical-align: middle;
       margin-right: 5px;
-    } 
-  </style>
+    }
 
+    #help-button {
+      display: inline-block;
+      margin-left: 10px;
+      background-color: #cf4d8f;
+      color: white;
+      font-size: 16px;
+      width: 22px;
+      height: 22px;
+      line-height: 22px;
+      text-align: center;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    #help-button:hover {
+      background-color: #b83d7a;
+    }
+  </style>
 </head>
+
 <body>
 
 <?php include "include/header_and_nav.php" ?>
@@ -283,12 +270,14 @@ if (!$game) {
 <main class="game-page-wrapper">
   <section class="game-detail-container" style="display: flex; gap: 30px; margin: 50px;">
     <div class="media-carousel game-image-container">
-      <!-- Game Image -->
       <img src="Media/<?= htmlspecialchars($game['image_url']) ?>" alt="cover">
     </div>
 
     <div class="game-info">
-      <h1 class="game-title"><?= htmlspecialchars($game['title']) ?></h1>
+      <h1 class="game-title">
+        <?= htmlspecialchars($game['title']) ?>
+        <span id="help-button" title="Click for help">?</span>
+      </h1>
       <p class="game-price">
         <img src="Media/SAR_Symbol-white.png" class="SAR"><?= htmlspecialchars($game['price']) ?>
       </p>
@@ -348,6 +337,16 @@ document.getElementById('add-to-cart-form').addEventListener('submit', function(
     console.error(err);
     alert('Error adding to cart.');
   });
+});
+
+document.getElementById('help-button').addEventListener('click', function () {
+  alert(
+    "🆘 Help Guide:\n\n" +
+    "- Use ➖ and ➕ to change quantity.\n" +
+    "- Click 'Add to Cart' to add this game to your shopping cart.\n" +
+    "- Login is required to check out.\n" +
+    "- Use the cart icon in the header to view your cart."
+  );
 });
 </script>
 

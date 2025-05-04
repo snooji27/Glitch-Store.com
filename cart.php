@@ -7,12 +7,12 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$database = new $Database();
-$database->connect();
+// $database = new $Database();
+// $database->connect();
 
 if (isset($_POST['remove_all'])) {
     $_SESSION['cart'] = [];
-    header('Location: cart.html');
+    header('Location: cart.php');
     exit;
 }
 
@@ -20,7 +20,7 @@ if (isset($_POST['remove_all'])) {
 //    $game_id = $_POST['remove_games'];
 //    $_SESSION['cart'] = array_filter($_SESSION['cart'], function($games) use($game_id) {return $games('id') != $game_id};
 //});
-//header('Location: cart.html');
+//header('Location: cart.php');
 //exit;
 //}
 
@@ -427,7 +427,7 @@ if (isset($_POST['remove_all'])) {
             <ul>
                 <li><a href="Homepage.html">HOME</a></li>
                 <li><a href="gamestore.php">GAMES</a></li>
-                <li><a href="gamesowned.html">GAMES OWNED</a></li>
+                <li><a href="gamesowned.php">GAMES OWNED</a></li>
                 <li><a href="Homepage.html/#about">ABOUT US</a></li>
                 <li><a href="support.html">SUPPORT</a></li>
             </ul>

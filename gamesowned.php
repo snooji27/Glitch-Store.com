@@ -1,4 +1,18 @@
-<!DOCTYPE html>
+<?php 
+session_start();
+include 'db_connect.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php?redirect=gamesowned.php');
+    exit;
+}
+$user_id = $_SESSION['user_id'];
+$search_term = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'title_asc';
+?>
+
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,27 +20,9 @@
     <title>Glitch - Games Owned</title>
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search"  />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <?php include 'db_connect.php'; ?>
-
-<!-- to check if the user is looged in -->
-<?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    echo '<main><h2>Please log in to view your owned games.</h2></main>';
-    echo '</body></html>';
-    exit();
-}
-$user_id = $_SESSION['user_id'];
-$search_term = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
-$sort = isset($_GET['sort']) ? $_GET['sort'] : 'title_asc';
-?>
-
- <!-- header should be here--> 
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">    
     <main>
+        <?php include "include/header_and_nav.php" ?>
         <h2>Your Owned Games: </h2>
         
         <!--- search bar --> 
@@ -46,7 +42,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'title_asc';
         
 <section class="games-list">
 <?php
-$query = "SELECT g.game_id, g.title, g.image_url, g.download_url, go.purchase_date
+$query = "SELECT g.game_id, g.title, g.image_url, go.purchase_date
           FROM GameOwnership go
           JOIN Game g ON go.game_id = g.game_id
           WHERE go.user_id = $user_id";
@@ -64,7 +60,6 @@ if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $game_title = htmlspecialchars($row['title']);
         $game_image = htmlspecialchars($row['image_url']);
-        $game_download = htmlspecialchars($row['download_url']);
         $purchase_date = date('d/m/Y', strtotime($row['purchase_date']));
         ?>
         <div class="game-card">
@@ -84,5 +79,14 @@ mysqli_free_result($result);
     </main>
     
      <!-- footer should be here--> 
+     <footer id="contact">
+  <div class="footer-social">
+    <a href="#"><i class="fab fa-discord"></i></a>
+    <a href="#"><i class="fab fa-twitch"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+  </div>
+  <p>&copy; 2025 GLITCH Game Store | All Rights Reserved</p>
+</footer>
 </body>
 </html>
