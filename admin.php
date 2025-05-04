@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['admin_id'])) {
+    // Not logged in — redirect to login page
+    header("Location: /Glitch-Store.com-main/Login_Signup/Adm_Log.html");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,17 +23,22 @@ session_start();
     <a href="admin.php"><img src="/Glitch-Store.com-main/Media/icon2.png" alt="Logo" class="header-logo"></a>
   </div>
   <nav>
-    <ul>
-      <li><a href="admin.php" class="function-btn">Admin Dashboard</a></li>
-      <li><a href="add_game.php" class="function-btn">Add Game</a></li>
-      <li><a href="view_games.php" class="function-btn">View Games</a></li>
-      <li><a href="Login_Signup/Selection.html" class="logout-btn">Logout</a></li>
-    </ul>
-  </nav>
+  <ul>
+    <li><a href="admin.php" class="function-btn">Admin Dashboard</a></li>
+    <li><a href="add_game.php" class="function-btn">Add Game</a></li>
+    <li><a href="view_games.php" class="function-btn">View Games</a></li>
+
+    <?php if (isset($_SESSION['admin_id'])): ?>
+      <li><span style="color:white;">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
+      <li><a href="logout.php" class="logout-btn">Logout</a></li>
+    <?php endif; ?>
+  </ul>
+</nav>
+
 </header>
 
 <main class="main-content">
-  <h1>Welcome, Admin!</h1>
+  <h1>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></h1>
   <p>Select an action from the menu above.</p>
 </main>
 
