@@ -286,6 +286,48 @@ nav ul li a:hover::after {
 .edit-form textarea::placeholder {
     color: #aaa;
 }
+/* Password Field with Toggle Eye */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+    width: 100%;
+    padding-right: 40px; /* space for the eye icon */
+    box-sizing: border-box;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #cf4d8f;
+    font-size: 18px;
+}
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input[type="password"],
+.password-container input[type="text"] {
+    width: 100%;
+    padding-right: 40px; /* space for the eye icon */
+    box-sizing: border-box;
+}
+
+.password-container i {
+    position: absolute;
+    right: 12px;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 16px;
+}
 
 /* Footer */
 footer {

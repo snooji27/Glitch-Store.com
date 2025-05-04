@@ -17,7 +17,7 @@
         <ul>
             <li><a href="Homepage.html">HOME</a></li>
             <li><a href="gamestore.php">GAMES</a></li>
-            <li><a href="gamesowned.php">GAMES OWNED</a></li>
+            <li><a href="gamesowned.html">GAMES OWNED</a></li>
             <li><a href="#about">ABOUT US</a></li>
             <li><a href="support.html">SUPPORT</a></li>
         </ul>
@@ -31,24 +31,28 @@
             <p class="bio">Update your info and personalize your account</p>
         </div>
 
-        <!-- Start of the form -->
-        <form class="edit-form" enctype="multipart/form-data">
-            <label>Username</label>
-            <input type="text" placeholder="PlayerOne">
+        <form class="edit-form" action="update_profile.php" method="POST" enctype="multipart/form-data">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="PlayerOne" required>
 
-            <label>Bio</label>
-            <textarea rows="3" placeholder="Gamer | Collector | Trophy Hunter 🎮"></textarea>
+            <label for="bio">Bio</label>
+            <textarea id="bio" name="bio" rows="3" placeholder="Gamer | Collector | Trophy Hunter 🎮" required></textarea>
 
-            <label>Profile Picture</label>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="example@email.com" required>
+
+            <label for="profile-picture">Profile Picture</label>
             <input type="file" name="profile-picture" accept="image/*">
 
-            <label>Password</label>
-            <input type="password" placeholder="New Password">
+            <label for="new-password">New Password</label>
+            <div class="password-container">
+                <input type="password" id="new-password" name="new-password" placeholder="New Password" required>
+                <i class="fa-solid fa-eye" id="togglePassword"></i>
+            </div>
 
             <button type="submit" class="settings-btn">Save Changes</button>
             <a href="userprofile.html" class="settings-btn" style="background-color:#777;">Cancel</a>
         </form>
-        <!-- End of the form -->
     </section>
 </main>
 
@@ -62,7 +66,17 @@
     <p>&copy; 2025 GLITCH Game Store | All Rights Reserved</p>
 </footer>
 
+<script>
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordField = document.getElementById("new-password");
+
+    togglePassword.addEventListener("click", () => {
+        const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+        passwordField.setAttribute("type", type);
+        togglePassword.classList.toggle("fa-eye");
+        togglePassword.classList.toggle("fa-eye-slash");
+    });
+</script>
+
 </body>
 </html>
-
-
