@@ -56,8 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <nav>
     <ul>
       <li><a href="admin.php" class="function-btn">Admin Dashboard</a></li>
-      <li><a href="add_game.php" class="function-btn">Add Game</a></li>
-      <li><a href="view_games.php" class="function-btn">View Games</a></li>
+      <li><a href="add-game.php" class="function-btn">Add Game</a></li>
+      <li><a href="view-games.php" class="function-btn">View Games</a></li>
       <li><a href="Login_Signup/Selection.html" class="logout-btn">Logout</a></li>
     </ul>
   </nav>
